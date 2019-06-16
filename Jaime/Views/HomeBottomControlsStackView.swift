@@ -32,5 +32,4 @@ class HomeBottomControlsStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
         
     }
-    
 }
