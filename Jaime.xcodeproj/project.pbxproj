@@ -12,6 +12,7 @@
 		DA3ED8BA22B5FB15001E47D5 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3ED8B922B5FB15001E47D5 /* TopNavigationStackView.swift */; };
 		DA3ED8BC22B6BEFE001E47D5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3ED8BB22B6BEFE001E47D5 /* CardView.swift */; };
 		DA3ED8BF22B6EFB4001E47D5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3ED8BE22B6EFB4001E47D5 /* User.swift */; };
+		DA712EA722B730D5009D6471 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA712EA622B730D5009D6471 /* CardViewModel.swift */; };
 		DABBEAD022B593770025A6B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBEACF22B593770025A6B7 /* AppDelegate.swift */; };
 		DABBEAD222B593770025A6B7 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBEAD122B593770025A6B7 /* HomeController.swift */; };
 		DABBEAD522B593770025A6B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABBEAD322B593770025A6B7 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 		DA3ED8B922B5FB15001E47D5 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 		DA3ED8BB22B6BEFE001E47D5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		DA3ED8BE22B6EFB4001E47D5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DA712EA622B730D5009D6471 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		DABBEACC22B593770025A6B7 /* Jaime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jaime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DABBEACF22B593770025A6B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DABBEAD122B593770025A6B7 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -74,8 +76,17 @@
 		DA3ED8C022B72D88001E47D5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DABBEAD122B593770025A6B7 /* HomeController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DA712EA522B730BB009D6471 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				DA712EA622B730D5009D6471 /* CardViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		DABBEAC322B593770025A6B7 = {
@@ -97,12 +108,12 @@
 		DABBEACE22B593770025A6B7 /* Jaime */ = {
 			isa = PBXGroup;
 			children = (
+				DA712EA522B730BB009D6471 /* ViewModels */,
 				DA3ED8C022B72D88001E47D5 /* Controllers */,
 				DA3ED8BD22B6E891001E47D5 /* Model */,
 				DA3ED8B622B5F37E001E47D5 /* Views */,
 				DA3ED8B322B5E5FA001E47D5 /* Extensions */,
 				DABBEACF22B593770025A6B7 /* AppDelegate.swift */,
-				DABBEAD122B593770025A6B7 /* HomeController.swift */,
 				DABBEAD322B593770025A6B7 /* Main.storyboard */,
 				DABBEAD622B593780025A6B7 /* Assets.xcassets */,
 				DABBEAD822B593780025A6B7 /* LaunchScreen.storyboard */,
@@ -186,6 +197,7 @@
 				DA3ED8B822B5F3B4001E47D5 /* HomeBottomControlsStackView.swift in Sources */,
 				DABBEAD022B593770025A6B7 /* AppDelegate.swift in Sources */,
 				DA3ED8B522B5E676001E47D5 /* Extensions+UIView.swift in Sources */,
+				DA712EA722B730D5009D6471 /* CardViewModel.swift in Sources */,
 				DA3ED8BC22B6BEFE001E47D5 /* CardView.swift in Sources */,
 				DA3ED8BA22B5FB15001E47D5 /* TopNavigationStackView.swift in Sources */,
 				DA3ED8BF22B6EFB4001E47D5 /* User.swift in Sources */,

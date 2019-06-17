@@ -13,9 +13,10 @@ class HomeController: UIViewController {
     let buttonsStackView = HomeBottomControlsStackView()
     let cardsDeckView = UIView()
     let navigationStackView = TopNavigationStackView()
-    let users = [
-        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
-        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c")
+    
+    let cardViewModels = [
+        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c").toCardViewModel(),
+        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c").toCardViewModel()
     ]
 
     override func viewDidLoad() {
@@ -25,18 +26,16 @@ class HomeController: UIViewController {
     }
     
     fileprivate func setupDummyCards() {
-        users.forEach { (user: User) in
+        
+        cardViewModels.forEach { (cardViewModel) in
             let cardView = CardView() //CardView(frame: .zero)
-            cardView.imageView.image = UIImage(named: user.imageName)
+            cardView.imageView.image = UIImage(named: cardViewModel.imageName)
+            cardView.informationLabel.attributedText = cardViewModel.attributedString
+            cardView.informationLabel.textAlignment = cardViewModel.texAllignment
             
-            let attrubutedText = NSMutableAttributedString(string: user.name, attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
-            attrubutedText.append(NSAttributedString(string: "  \(user.age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
-            attrubutedText.append(NSAttributedString(string: "\n\(user.profession)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
-            cardView.informationLabel.attributedText = attrubutedText
             cardsDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }
-
     }
 
     /// MARK:- Fileprivate
