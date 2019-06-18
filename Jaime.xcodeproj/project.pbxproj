@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA01FC1122B73E5500D98501 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01FC1022B73E5500D98501 /* Advertiser.swift */; };
 		DA3ED8B522B5E676001E47D5 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3ED8B422B5E676001E47D5 /* Extensions+UIView.swift */; };
 		DA3ED8B822B5F3B4001E47D5 /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3ED8B722B5F3B4001E47D5 /* HomeBottomControlsStackView.swift */; };
 		DA3ED8BA22B5FB15001E47D5 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3ED8B922B5FB15001E47D5 /* TopNavigationStackView.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA01FC1022B73E5500D98501 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		DA3ED8B422B5E676001E47D5 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 		DA3ED8B722B5F3B4001E47D5 /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
 		DA3ED8B922B5FB15001E47D5 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				DA3ED8BE22B6EFB4001E47D5 /* User.swift */,
+				DA01FC1022B73E5500D98501 /* Advertiser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			files = (
 				DABBEAD222B593770025A6B7 /* HomeController.swift in Sources */,
 				DA3ED8B822B5F3B4001E47D5 /* HomeBottomControlsStackView.swift in Sources */,
+				DA01FC1122B73E5500D98501 /* Advertiser.swift in Sources */,
 				DABBEAD022B593770025A6B7 /* AppDelegate.swift in Sources */,
 				DA3ED8B522B5E676001E47D5 /* Extensions+UIView.swift in Sources */,
 				DA712EA722B730D5009D6471 /* CardViewModel.swift in Sources */,

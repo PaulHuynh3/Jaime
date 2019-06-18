@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeController.swift
 //  Jaime
 //
 //  Created by Paul on 2019-06-15.
@@ -14,10 +14,17 @@ class HomeController: UIViewController {
     let cardsDeckView = UIView()
     let navigationStackView = TopNavigationStackView()
     
-    let cardViewModels = [
-        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c").toCardViewModel(),
-        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c").toCardViewModel()
-    ]
+    let cardViewModels: [CardViewModel] = {
+        let producers: [ProducesCardViewModel] = [
+            Advertiser(title: "Slide Out Menu", brandName: "Coca Cola", posterPhotoName: "slide_out_menu_poster"),
+            User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
+            User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c")
+        ]
+        let viewModels = producers.map({ (producers) -> CardViewModel in
+            return producers.toCardViewModel()
+        })
+        return viewModels
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +36,7 @@ class HomeController: UIViewController {
         
         cardViewModels.forEach { (cardViewModel) in
             let cardView = CardView() //CardView(frame: .zero)
-            cardView.imageView.image = UIImage(named: cardViewModel.imageName)
-            cardView.informationLabel.attributedText = cardViewModel.attributedString
-            cardView.informationLabel.textAlignment = cardViewModel.texAllignment
-            
+            cardView.cardViewModel = cardViewModel
             cardsDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }
