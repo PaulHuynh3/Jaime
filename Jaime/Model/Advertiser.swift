@@ -15,11 +15,11 @@ struct Advertiser: ProducesCardViewModel {
     
     func toCardViewModel() -> CardViewModel {
         
-        let attributedString = NSMutableAttributedString(string: title, attributes: [.font: UIFont.systemFont(ofSize: 34, weight: .heavy)])
+        let attributedString = NSMutableAttributedString(string: title, attributes: [.font: UIFont.systemFont(ofSize: 34, weight: .heavy), .foregroundColor: UIColor.white])
         
-        attributedString.append(NSAttributedString(string: "\n\(brandName)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .bold)]))
+        attributedString.append(NSAttributedString(string: "\n\(brandName)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .bold), .foregroundColor: UIColor.white]))
         
-        return CardViewModel(imageNames: [posterPhotoName], attributedString: attributedString, texAllignment: .center)
+        return CardViewModel(imageNames: [posterPhotoName], attributedString: attributedString, textAllignment: .center)
     }
 }
 
