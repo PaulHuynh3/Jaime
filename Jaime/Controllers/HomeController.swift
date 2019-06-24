@@ -30,10 +30,14 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         setupDummyCards()
+        setupSettings()
     }
-    
+
+    fileprivate func setupSettings() {
+        navigationStackView.settingsButton.addTarget(self, action:#selector(navigateToProfile), for: .touchUpInside)
+    }
+
     fileprivate func setupDummyCards() {
-        
         cardViewModels.forEach { (cardViewModel) in
             let cardView = CardView() //CardView(frame: .zero)
             cardView.cardViewModel = cardViewModel
@@ -55,6 +59,11 @@ class HomeController: UIViewController {
         overallStackView.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
         overallStackView.bringSubviewToFront(cardsDeckView)
     }
+
+    @objc func navigateToProfile() {
+        print("Navigating to profile")
+        let registrationViewController = RegistrationViewController()
+        present(registrationViewController, animated: true)
+    }
     
 }
-
