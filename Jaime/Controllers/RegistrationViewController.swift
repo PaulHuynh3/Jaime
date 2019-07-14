@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import JGProgressHUD
 
 class RegistrationViewController: UIViewController {
 
@@ -106,7 +108,17 @@ class RegistrationViewController: UIViewController {
     // MARK:- Functions
 
     @objc fileprivate func handleRegistration() {
-        print("Registration success")
+        self.dismissKeyboard()
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextfield.text else { return }
+
+        Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
+            if let err = error {
+                self.showHUDWithErorr(err: err)
+                return
+            }
+            print("Success \(authDataResult?.user.uid)")
+        }
     }
 
     @objc fileprivate func handleTextChange(textField: UITextField) {
@@ -117,6 +129,14 @@ class RegistrationViewController: UIViewController {
         } else {
             registrationViewModel.password = textField.text
         }
+    }
+
+    fileprivate func showHUDWithErorr(err: Error) {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Failed"
+        hud.detailTextLabel.text = err.localizedDescription
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 4)
     }
 
     fileprivate func setupRegistrationViewModelObserver() {
