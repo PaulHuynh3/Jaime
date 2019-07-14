@@ -21,6 +21,7 @@
 		DABBEADA22B593780025A6B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABBEAD822B593780025A6B7 /* LaunchScreen.storyboard */; };
 		EB2C66CD22C02B8900332D3B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C66CC22C02B8900332D3B /* RegistrationViewController.swift */; };
 		EB2C66CF22C05B5900332D3B /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C66CE22C05B5900332D3B /* CustomTextfield.swift */; };
+		EBCB41C922C32788007C2A1B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		DABBEADB22B593780025A6B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB2C66CC22C02B8900332D3B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		EB2C66CE22C05B5900332D3B /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
+		EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			children = (
 				DABBEAD122B593770025A6B7 /* HomeController.swift */,
 				EB2C66CC22C02B8900332D3B /* RegistrationViewController.swift */,
+				EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DABBEAD222B593770025A6B7 /* HomeController.swift in Sources */,
+				EBCB41C922C32788007C2A1B /* RegistrationViewModel.swift in Sources */,
 				DA3ED8B822B5F3B4001E47D5 /* HomeBottomControlsStackView.swift in Sources */,
 				DA01FC1122B73E5500D98501 /* Advertiser.swift in Sources */,
 				DABBEAD022B593770025A6B7 /* AppDelegate.swift in Sources */,

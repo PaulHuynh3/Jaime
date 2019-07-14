@@ -25,6 +25,7 @@ class RegistrationViewController: UIViewController {
        let textfield = CustomTextField(padding: 16)
         textfield.placeholder = "Enter full name"
         textfield.backgroundColor = .white
+        textfield.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textfield
     }()
 
@@ -34,6 +35,7 @@ class RegistrationViewController: UIViewController {
         textfield.keyboardType = .emailAddress
         textfield.backgroundColor = .white
         textfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        textfield.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textfield
     }()
 
@@ -43,20 +45,26 @@ class RegistrationViewController: UIViewController {
         textfield.isSecureTextEntry = true
         textfield.backgroundColor = .white
         textfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        textfield.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textfield
     }()
 
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
-        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         button.backgroundColor = #colorLiteral(red: 0.8135682344, green: 0.1019940302, blue: 0.3355026245, alpha: 1)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .lightGray
+        button.setTitleColor(.gray, for: .normal)
+        button.isEnabled = false
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.layer.cornerRadius = 22 //to make it round it should be half the height
+        button.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
         return button
     }()
     fileprivate let gradientLayer = CAGradientLayer()
+    let registrationViewModel = RegistrationViewModel()
 
     lazy var verticalStackView: UIStackView = {
       let sv = UIStackView(arrangedSubviews: [
@@ -83,6 +91,7 @@ class RegistrationViewController: UIViewController {
         setupLayout()
         setupNotificationObserver()
         setupTapGesture()
+        setupRegistrationViewModelObserver()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -95,6 +104,33 @@ class RegistrationViewController: UIViewController {
     }
 
     // MARK:- Functions
+
+    @objc fileprivate func handleRegistration() {
+        print("Registration success")
+    }
+
+    @objc fileprivate func handleTextChange(textField: UITextField) {
+        if textField == nameTextField {
+            registrationViewModel.fullName = textField.text
+        } else if textField == emailTextField {
+            registrationViewModel.email = textField.text
+        } else {
+            registrationViewModel.password = textField.text
+        }
+    }
+
+    fileprivate func setupRegistrationViewModelObserver() {
+        registrationViewModel.isFormValidObserver = { [weak self] isFormValid in
+            self?.registerButton.isEnabled = isFormValid
+            if isFormValid {
+                self?.registerButton.setTitleColor(.white, for: .normal)
+                self?.registerButton.backgroundColor = #colorLiteral(red: 0.8135682344, green: 0.1019940302, blue: 0.3355026245, alpha: 1)
+            } else {
+                self?.registerButton.backgroundColor = .lightGray
+                self?.registerButton.setTitleColor(.gray, for: .normal)
+            }
+        }
+    }
 
     fileprivate func setupTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
