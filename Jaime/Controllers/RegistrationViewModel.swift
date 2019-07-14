@@ -10,6 +10,9 @@ import UIKit
 
 class RegistrationViewModel {
 
+    var bindableImage = Bindable<UIImage>()
+    var bindableIsFormValidObserver = Bindable<Bool>()
+
     var fullName: String? {
         didSet {
             checkFormValiditity()
@@ -28,10 +31,30 @@ class RegistrationViewModel {
 
     fileprivate func checkFormValiditity() {
         let isFormValid = fullName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
-        isFormValidObserver?(isFormValid)
+        bindableIsFormValidObserver.value = isFormValid
     }
 
-    //reactive programming
-    var isFormValidObserver: ((Bool) -> ())?
-
 }
+
+/* //Reactive programming to for MVVM
+ Create observer in viewModel:
+ var image = {
+    didSet {
+        imageObserver?(image)
+    }
+ }
+ var imageObserver: ((UIImage?) -> ())?
+
+
+ Set up observers in viewDidLoad of viewControler:
+ func setupObserver() {
+    imageObserver = { [weak self] image in
+        self.selectPhotoButton.setImage(image, .normal)
+    }
+ }
+
+ ImagePicker function:
+ func didSelectImageInImagePicker() {
+    self.viewModel.image = image
+ }
+ */

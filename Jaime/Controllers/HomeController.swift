@@ -10,9 +10,9 @@ import UIKit
 
 class HomeController: UIViewController {
     
-    let buttonsStackView = HomeBottomControlsStackView()
-    let cardsDeckView = UIView()
-    let navigationStackView = TopNavigationStackView()
+    fileprivate let buttonsStackView = HomeBottomControlsStackView()
+    fileprivate let cardsDeckView = UIView()
+    fileprivate let navigationStackView = TopNavigationStackView()
     
     let cardViewModels: [CardViewModel] = {
         let producers: [ProducesCardViewModel] = [

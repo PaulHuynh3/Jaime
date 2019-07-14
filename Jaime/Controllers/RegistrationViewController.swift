@@ -20,6 +20,9 @@ class RegistrationViewController: UIViewController {
         button.backgroundColor = .white
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(handlePhotoSelection), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.clipsToBounds = true
         return button
     }()
 
@@ -93,7 +96,7 @@ class RegistrationViewController: UIViewController {
         setupLayout()
         setupNotificationObserver()
         setupTapGesture()
-        setupRegistrationViewModelObserver()
+        setupRegistrationViewModelObservers()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -106,6 +109,12 @@ class RegistrationViewController: UIViewController {
     }
 
     // MARK:- Functions
+
+    @objc fileprivate func handlePhotoSelection() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
+    }
 
     @objc fileprivate func handleRegistration() {
         self.dismissKeyboard()
@@ -139,8 +148,9 @@ class RegistrationViewController: UIViewController {
         hud.dismiss(afterDelay: 4)
     }
 
-    fileprivate func setupRegistrationViewModelObserver() {
-        registrationViewModel.isFormValidObserver = { [weak self] isFormValid in
+    fileprivate func setupRegistrationViewModelObservers() {
+        registrationViewModel.bindableIsFormValidObserver.bind { [weak self] isFormValid  in
+            guard let isFormValid = isFormValid else { return }
             self?.registerButton.isEnabled = isFormValid
             if isFormValid {
                 self?.registerButton.setTitleColor(.white, for: .normal)
@@ -150,6 +160,12 @@ class RegistrationViewController: UIViewController {
                 self?.registerButton.setTitleColor(.gray, for: .normal)
             }
         }
+
+        registrationViewModel.bindableImage.bind { [weak self] image in
+            self?.selectPhotoButton.setImage(image, for: .normal)
+        }
+
+        
     }
 
     fileprivate func setupTapGesture() {
@@ -204,5 +220,18 @@ class RegistrationViewController: UIViewController {
         overallStackView.spacing = 8
         overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+}
+
+extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        registrationViewModel.bindableImage.value = image?.withRenderingMode(.alwaysOriginal)
+        dismiss(animated: true)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
     }
 }
