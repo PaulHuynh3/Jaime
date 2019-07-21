@@ -120,9 +120,11 @@ class RegistrationViewController: UIViewController {
     @objc fileprivate func handleRegistration() {
         self.dismissKeyboard()
         registrationViewModel.performRegistration { err in
+            if let err = err {
                 self.showHUDWithErorr(err: err)
+                return
             }
-        registrationViewModel.bindableIsRegistering.value = true
+        }
     }
 
     @objc fileprivate func handleTextChange(textField: UITextField) {

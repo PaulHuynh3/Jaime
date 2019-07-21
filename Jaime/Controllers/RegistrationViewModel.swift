@@ -31,35 +31,49 @@ class RegistrationViewModel {
         }
     }
 
-    func performRegistration(completion: @escaping (Error) -> ()) {
+    func performRegistration(completion: @escaping (Error?) -> ()) {
         guard let email = email else { return }
         guard let password = password else { return }
+        bindableIsRegistering.value = true
         Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
             if let err = error {
                 completion(err)
                 return
             }
-            print("Success \(authDataResult?.user.uid)")
+            self.saveImageToFirebase(completion: completion)
+        }
+    }
 
-            let fileName = UUID().uuidString
-            let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
-            let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
-            ref.putData(imageData, metadata: nil, completion: { (_, err) in
+    fileprivate func saveImageToFirebase(completion: @escaping (Error?) -> ()) {
+        let fileName = UUID().uuidString
+        let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
+        let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
+        ref.putData(imageData, metadata: nil, completion: { (_, err) in
+            if let err = err {
+                completion(err)
+                return
+            }
+            ref.downloadURL(completion: { (url, err) in
                 if let err = err {
                     completion(err)
                     return
                 }
-                print("Finished uploading Image to storage")
-
-                ref.downloadURL(completion: { (url, err) in
-                    if let err = err {
-                        completion(err)
-                        return
-                    }
-                    print("Download url of our image is:", url?.absoluteString ?? "")
-                    self.bindableIsRegistering.value = false
-                })
+                self.bindableIsRegistering.value = false
+                let imageUrl = url?.absoluteString ?? ""
+                self.saveInfoToFirestore(imageUrl: imageUrl, completion: completion)
             })
+        })
+    }
+
+    fileprivate func saveInfoToFirestore(imageUrl: String, completion: @escaping (Error?) -> ()) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        let documentData = ["fullName": self.fullName ?? "", "uid": uid, "imageUrl1": imageUrl]
+        Firestore.firestore().collection("users").document(uid).setData(documentData) { (err) in
+            if let err = err {
+                completion(err)
+                return
+            }
+            completion(nil)
         }
     }
 
