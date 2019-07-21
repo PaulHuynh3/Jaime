@@ -27,13 +27,12 @@ class CardViewModel {
 
     fileprivate var imageIndex = 0 {
         didSet {
-            let imageName = imageNames[imageIndex]
-            let image = UIImage(named: imageName)
-            imageTappedCallback?(image, imageIndex)
+            let imageUrl = imageNames[imageIndex]
+            imageTappedCallback?(imageUrl, imageIndex)
         }
     }
 
-    var imageTappedCallback: ((UIImage?, Int) -> ())?
+    var imageTappedCallback: ((String?, Int) -> ())?
 
     func showNextPicture() {
         imageIndex = min(imageIndex + 1, imageNames.count - 1)

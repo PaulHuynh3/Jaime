@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CardView: UIView {
     
     var cardViewModel: CardViewModel! {
         didSet{
             let imageName = cardViewModel.imageNames.first ?? ""
-            imageView.image = UIImage(named: imageName)
+            if let url = URL(string: imageName) {
+                imageView.sd_setImage(with: url)
+            }
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAllignment
             
@@ -29,9 +32,10 @@ class CardView: UIView {
     }
 
     fileprivate func setupImageCallback() {
-        cardViewModel.imageTappedCallback = { [weak self] image, index in
-            self?.imageView.image = image
-
+        cardViewModel.imageTappedCallback = { [weak self] imageUrl, index in
+            if let url = URL(string: imageUrl ?? "") {
+                self?.imageView.sd_setImage(with: url)
+            }
             self?.barsStackView.arrangedSubviews.forEach({ (view) in
                 view.backgroundColor = self?.barDeselectedColour
             })
