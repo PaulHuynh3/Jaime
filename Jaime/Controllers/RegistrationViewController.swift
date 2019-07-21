@@ -70,6 +70,7 @@ class RegistrationViewController: UIViewController {
     }()
     fileprivate let gradientLayer = CAGradientLayer()
     let registrationViewModel = RegistrationViewModel()
+    let registeringHud = JGProgressHUD(style: .dark)
 
     lazy var verticalStackView: UIStackView = {
       let sv = UIStackView(arrangedSubviews: [
@@ -100,7 +101,7 @@ class RegistrationViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self) //prevent retain cycles
+//        NotificationCenter.default.removeObserver(self) //prevent retain cycles
     }
 
     override func viewWillLayoutSubviews() { //basically called when view changes
@@ -118,16 +119,10 @@ class RegistrationViewController: UIViewController {
 
     @objc fileprivate func handleRegistration() {
         self.dismissKeyboard()
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextfield.text else { return }
-
-        Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
-            if let err = error {
+        registrationViewModel.performRegistration { err in
                 self.showHUDWithErorr(err: err)
-                return
             }
-            print("Success \(authDataResult?.user.uid)")
-        }
+        registrationViewModel.bindableIsRegistering.value = true
     }
 
     @objc fileprivate func handleTextChange(textField: UITextField) {
@@ -165,7 +160,14 @@ class RegistrationViewController: UIViewController {
             self?.selectPhotoButton.setImage(image, for: .normal)
         }
 
-        
+        registrationViewModel.bindableIsRegistering.bind { [weak self] isRegistering in
+            if isRegistering == true {
+                self?.registeringHud.show(in: self?.view ?? UIView())
+                self?.registeringHud.textLabel.text = "Registering"
+            } else {
+                self?.registeringHud.dismiss()
+            }
+        }
     }
 
     fileprivate func setupTapGesture() {
