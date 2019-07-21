@@ -8,37 +8,23 @@
 
 import UIKit
 import Firebase
+import JGProgressHUD
 
 class HomeController: UIViewController {
     
-    fileprivate let buttonsStackView = HomeBottomControlsStackView()
     fileprivate let cardsDeckView = UIView()
-    fileprivate let navigationStackView = TopNavigationStackView()
-    
-//    let cardViewModels: [CardViewModel] = {
-//        let producers: [ProducesCardViewModel] = [
-//            Advertiser(title: "Slide Out Menu", brandName: "Coca Cola", posterPhotoName: "slide_out_menu_poster"),
-//            User(name: "Kelly", age: 23, profession: "Music DJ", imageNames: ["kelly1","kelly2", "kelly3"]),
-//            User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"])
-//        ]
-//        let viewModels = producers.map({ (producers) -> CardViewModel in
-//            return producers.toCardViewModel()
-//        })
-//        return viewModels
-//    }()
+    fileprivate let topStackView = TopNavigationStackView()
+    fileprivate let bottomControls = HomeBottomControlsStackView()
 
     var cardViewModels = [CardViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        topStackView.settingsButton.addTarget(self, action:#selector(navigateToProfile), for: .touchUpInside)
+        bottomControls.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
         setupLayout()
         setupFirestoreUserCards()
-        setupSettings()
-        fetchUserFromFirebase()
-    }
-
-    fileprivate func setupSettings() {
-        navigationStackView.settingsButton.addTarget(self, action:#selector(navigateToProfile), for: .touchUpInside)
+        fetchUserFromFirestore()
     }
 
     fileprivate func setupFirestoreUserCards() {
@@ -54,7 +40,7 @@ class HomeController: UIViewController {
     
     fileprivate func setupLayout() {
         view.backgroundColor = .white
-        let overallStackView = UIStackView(arrangedSubviews: [navigationStackView, cardsDeckView, buttonsStackView])
+        let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, bottomControls])
         overallStackView.axis = .vertical
         
         view.addSubview(overallStackView)
@@ -65,11 +51,20 @@ class HomeController: UIViewController {
         overallStackView.bringSubviewToFront(cardsDeckView)
     }
 
-    fileprivate func fetchUserFromFirebase() {
+    @objc fileprivate func handleRefresh() {
+        fetchUserFromFirestore()
+    }
 
-//        let query = Firestore.firestore().collection("users").whereField("profession", isEqualTo: "Teacher")
-        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThan: 18).whereField("age", isLessThan: 27)
+    var lastFetchUser: User?
+
+    fileprivate func fetchUserFromFirestore() {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Fetching Users"
+        hud.show(in: view)
+        //introduce pagination
+        let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchUser?.uid ?? ""]).limit(to: 2)
         query.getDocuments { (querySnapshot, error) in
+            hud.dismiss()
             if let error = error {
                 print("Failed to fetch users", error)
                 return
@@ -78,9 +73,18 @@ class HomeController: UIViewController {
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
                 self.cardViewModels.append(user.toCardViewModel())
+                self.lastFetchUser = user
+                self.setupCardFromUser(user: user)
             })
-            self.setupFirestoreUserCards()
         }
+    }
+
+    fileprivate func setupCardFromUser(user: User) {
+        let cardView = CardView() //CardView(frame: .zero)
+        cardView.cardViewModel = user.toCardViewModel()
+        cardsDeckView.addSubview(cardView)
+        cardsDeckView.sendSubviewToBack(cardView) //fix flashing
+        cardView.fillSuperview()
     }
 
     @objc func navigateToProfile() {
@@ -90,3 +94,9 @@ class HomeController: UIViewController {
     }
     
 }
+
+/*
+ //how to query
+ let query = Firestore.firestore().collection("users").whereField("profession", isEqualTo: "Teacher")
+ let query = Firestore.firestore().collection("users").whereField("age", isGreaterThan: 18).whereField("age", isLessThan: 27)
+ */
