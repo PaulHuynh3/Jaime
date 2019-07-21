@@ -20,7 +20,7 @@ class HomeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        topStackView.settingsButton.addTarget(self, action:#selector(navigateToProfile), for: .touchUpInside)
+        topStackView.settingsButton.addTarget(self, action:#selector(navigateToSettings), for: .touchUpInside)
         bottomControls.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
         setupLayout()
         setupFirestoreUserCards()
@@ -87,10 +87,10 @@ class HomeController: UIViewController {
         cardView.fillSuperview()
     }
 
-    @objc func navigateToProfile() {
-        print("Navigating to profile")
-        let registrationViewController = RegistrationViewController()
-        present(registrationViewController, animated: true)
+    @objc func navigateToSettings() {
+        let settingsController = SettingsTableViewController()
+        let navigationController = UINavigationController(rootViewController: settingsController)
+        present(navigationController, animated: true)
     }
     
 }
