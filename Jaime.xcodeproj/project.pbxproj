@@ -17,6 +17,7 @@
 		DA712EA722B730D5009D6471 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA712EA622B730D5009D6471 /* CardViewModel.swift */; };
 		DAA54B6122E4FD5300518908 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA54B6022E4FD5300518908 /* SettingsTableViewController.swift */; };
 		DAA54B6322E508FA00518908 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA54B6222E508FA00518908 /* SettingsTableViewCell.swift */; };
+		DAA54B6522E553EB00518908 /* AgeRangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA54B6422E553EB00518908 /* AgeRangeTableViewCell.swift */; };
 		DABBEAD022B593770025A6B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBEACF22B593770025A6B7 /* AppDelegate.swift */; };
 		DABBEAD222B593770025A6B7 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBEAD122B593770025A6B7 /* HomeController.swift */; };
 		DABBEAD522B593770025A6B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABBEAD322B593770025A6B7 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		DA712EA622B730D5009D6471 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		DAA54B6022E4FD5300518908 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		DAA54B6222E508FA00518908 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		DAA54B6422E553EB00518908 /* AgeRangeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeTableViewCell.swift; sourceTree = "<group>"; };
 		DABBEACC22B593770025A6B7 /* Jaime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jaime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DABBEACF22B593770025A6B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DABBEAD122B593770025A6B7 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				DA3ED8BB22B6BEFE001E47D5 /* CardView.swift */,
 				EB2C66CE22C05B5900332D3B /* CustomTextfield.swift */,
 				DAA54B6222E508FA00518908 /* SettingsTableViewCell.swift */,
+				DAA54B6422E553EB00518908 /* AgeRangeTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				EB1D60CE22DBCB180054683A /* Bindable.swift in Sources */,
 				DABBEAD222B593770025A6B7 /* HomeController.swift in Sources */,
 				EBCB41C922C32788007C2A1B /* RegistrationViewModel.swift in Sources */,
+				DAA54B6522E553EB00518908 /* AgeRangeTableViewCell.swift in Sources */,
 				DA3ED8B822B5F3B4001E47D5 /* HomeBottomControlsStackView.swift in Sources */,
 				DA01FC1122B73E5500D98501 /* Advertiser.swift in Sources */,
 				DABBEAD022B593770025A6B7 /* AppDelegate.swift in Sources */,
