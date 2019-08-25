@@ -40,10 +40,6 @@ class AgeRangeTableViewCell: UITableViewCell {
         override var intrinsicContentSize: CGSize {
             return .init(width: 80, height: 0)
         }
-
-        override func drawText(in rect: CGRect) {
-            super.drawText(in: rect.insetBy(dx: 10, dy: 0))
-        }
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

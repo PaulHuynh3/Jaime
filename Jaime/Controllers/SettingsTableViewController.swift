@@ -11,6 +11,11 @@ import Firebase
 import JGProgressHUD
 import SDWebImage
 
+
+protocol SettingsControllerDelegate {
+    func didSaveSettings()
+}
+
 class CustomImagePickController: UIImagePickerController {
 
     var imageButton: UIButton?
@@ -25,6 +30,7 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     lazy var image3Button = createButton(selector: #selector(handleSelectPhoto))
 
     var user: User?
+    var delegate: SettingsControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,15 +99,12 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     }
 
     fileprivate func fetchCurrentUser() {
-       guard let uid = Auth.auth().currentUser?.uid else { return } //fetch specific user
-        Firestore.firestore().collection("users").document(uid).getDocument { (snapShot, error) in
-            if let error = error {
-                print(error)
+        Firestore.firestore().fetchCurrentUser { (user, err) in
+            if let err = err {
+                print("Failed to fetch user:", err)
                 return
             }
-            //fetch user
-            guard let dictionary = snapShot?.data() else { return }
-            self.user = User(dictionary: dictionary)
+            self.user = user
             self.loadUserPhotos()
             self.tableView.reloadData()
         }
@@ -262,8 +265,13 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave)),
-            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleCancel))
+            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         ]
+    }
+
+    @objc fileprivate func handleLogout() {
+        try? Auth.auth().signOut()
+        dismiss(animated: true)
     }
 
     @objc fileprivate func handleCancel() {
@@ -293,6 +301,9 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
                 return
             }
             print("Finished saving user info")
+            self.dismiss(animated: true, completion: {
+                self.delegate?.didSaveSettings()
+            })
         }
     }
 }

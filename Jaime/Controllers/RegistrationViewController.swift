@@ -10,125 +10,70 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class RegistrationViewController: UIViewController {
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        registrationViewModel.bindableImage.value = image
+        dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+
+}
+
+class RegistrationController: UIViewController {
+
+    var delegate: LoginControllerDelegate?
+
+    // UI Components
     let selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Upload Photo", for: .normal)
+        button.setTitle("Select Photo", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
-        button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
-        button.heightAnchor.constraint(equalToConstant: 275).isActive = true
+        button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 16
-        button.addTarget(self, action: #selector(handlePhotoSelection), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         button.imageView?.contentMode = .scaleAspectFill
         button.clipsToBounds = true
         return button
     }()
 
-    let nameTextField: CustomTextField = {
-       let textfield = CustomTextField(padding: 16)
-        textfield.placeholder = "Enter full name"
-        textfield.backgroundColor = .white
-        textfield.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
-        return textfield
-    }()
-
-    let emailTextField: CustomTextField = {
-        let textfield = CustomTextField(padding: 16)
-        textfield.placeholder = "Enter email"
-        textfield.keyboardType = .emailAddress
-        textfield.backgroundColor = .white
-        textfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        textfield.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
-        return textfield
-    }()
-
-    let passwordTextfield: CustomTextField = {
-        let textfield = CustomTextField(padding: 16)
-        textfield.placeholder = "Enter password"
-        textfield.isSecureTextEntry = true
-        textfield.backgroundColor = .white
-        textfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        textfield.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
-        return textfield
-    }()
-
-    let registerButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Register", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-        button.backgroundColor = #colorLiteral(red: 0.8135682344, green: 0.1019940302, blue: 0.3355026245, alpha: 1)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .lightGray
-        button.setTitleColor(.gray, for: .normal)
-        button.isEnabled = false
-        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        button.layer.cornerRadius = 22 //to make it round it should be half the height
-        button.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
-        return button
-    }()
-    fileprivate let gradientLayer = CAGradientLayer()
-    let registrationViewModel = RegistrationViewModel()
-    let registeringHud = JGProgressHUD(style: .dark)
-
-    lazy var verticalStackView: UIStackView = {
-      let sv = UIStackView(arrangedSubviews: [
-        nameTextField,
-        emailTextField,
-        passwordTextfield,
-        registerButton
-        ])
-        sv.axis = .vertical
-        sv.distribution = .fillEqually
-        sv.spacing = 8
-        return sv
-    }()
-
-    //lazy var means stackview is created after buttons, textfield created
-    lazy var overallStackView = UIStackView(arrangedSubviews: [
-        selectPhotoButton,
-        verticalStackView
-        ])
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupGradientLayer()
-        setupLayout()
-        setupNotificationObserver()
-        setupTapGesture()
-        setupRegistrationViewModelObservers()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-//        NotificationCenter.default.removeObserver(self) //prevent retain cycles
-    }
-
-    override func viewWillLayoutSubviews() { //basically called when view changes
-        super.viewWillLayoutSubviews()
-        gradientLayer.frame = view.bounds //expand the gradient to support landscape
-    }
-
-    // MARK:- Functions
-
-    @objc fileprivate func handlePhotoSelection() {
+    @objc func handleSelectPhoto() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         present(imagePickerController, animated: true)
     }
 
-    @objc fileprivate func handleRegistration() {
-        self.dismissKeyboard()
-        registrationViewModel.performRegistration { err in
-            if let err = err {
-                self.showHUDWithErorr(err: err)
-                return
-            }
-        }
-    }
+    lazy var selectPhotoButtonWidthAnchor = selectPhotoButton.widthAnchor.constraint(equalToConstant: 275)
+    lazy var selectPhotoButtonHeightAnchor = selectPhotoButton.heightAnchor.constraint(equalToConstant: 275)
+
+    let fullNameTextField: CustomTextField = {
+        let tf = CustomTextField(padding: 24, height: 50)
+        tf.placeholder = "Enter full name"
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+        return tf
+    }()
+    let emailTextField: CustomTextField = {
+        let tf = CustomTextField(padding: 24, height: 50)
+        tf.placeholder = "Enter email"
+        tf.keyboardType = .emailAddress
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+        return tf
+    }()
+    let passwordTextField: CustomTextField = {
+        let tf = CustomTextField(padding: 24, height: 50)
+        tf.placeholder = "Enter password"
+        tf.isSecureTextEntry = true
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+        return tf
+    }()
 
     @objc fileprivate func handleTextChange(textField: UITextField) {
-        if textField == nameTextField {
+        if textField == fullNameTextField {
             registrationViewModel.fullName = textField.text
         } else if textField == emailTextField {
             registrationViewModel.email = textField.text
@@ -137,105 +82,195 @@ class RegistrationViewController: UIViewController {
         }
     }
 
-    fileprivate func showHUDWithErorr(err: Error) {
+    let registerButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Register", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        //        button.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+        button.backgroundColor = .lightGray
+        button.setTitleColor(.gray, for: .disabled)
+        button.isEnabled = false
+        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        button.layer.cornerRadius = 22
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        return button
+    }()
+
+    let registeringHUD = JGProgressHUD(style: .dark)
+
+    @objc fileprivate func handleRegister() {
+        self.handleTapDismiss()
+        registrationViewModel.performRegistration { [weak self] (err) in
+            if let err = err {
+                self?.showHUDWithError(error: err)
+                return
+            }
+            print("Finished registering our user")
+
+            self?.dismiss(animated: true, completion: {
+                self?.delegate?.didFinishLoggingIn()
+            })
+        }
+    }
+
+    fileprivate func showHUDWithError(error: Error) {
+        registeringHUD.dismiss()
         let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Failed"
-        hud.detailTextLabel.text = err.localizedDescription
+        hud.textLabel.text = "Failed registration"
+        hud.detailTextLabel.text = error.localizedDescription
         hud.show(in: self.view)
         hud.dismiss(afterDelay: 4)
     }
 
-    fileprivate func setupRegistrationViewModelObservers() {
-        registrationViewModel.bindableIsFormValidObserver.bind { [weak self] isFormValid  in
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupGradientLayer()
+        setupLayout()
+        setupNotificationObservers()
+        setupTapGesture()
+        setupRegistrationViewModelObserver()
+    }
+
+    // MARK:- Private
+
+    let registrationViewModel = RegistrationViewModel()
+
+    fileprivate func setupRegistrationViewModelObserver() {
+        registrationViewModel.bindableIsFormValidObserver.bind { [unowned self] (isFormValid) in
             guard let isFormValid = isFormValid else { return }
-            self?.registerButton.isEnabled = isFormValid
-            if isFormValid {
-                self?.registerButton.setTitleColor(.white, for: .normal)
-                self?.registerButton.backgroundColor = #colorLiteral(red: 0.8135682344, green: 0.1019940302, blue: 0.3355026245, alpha: 1)
-            } else {
-                self?.registerButton.backgroundColor = .lightGray
-                self?.registerButton.setTitleColor(.gray, for: .normal)
-            }
+            self.registerButton.isEnabled = isFormValid
+            self.registerButton.backgroundColor = isFormValid ? #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1) : .lightGray
+            self.registerButton.setTitleColor(isFormValid ? .white : .gray, for: .normal)
         }
-
-        registrationViewModel.bindableImage.bind { [weak self] image in
-            self?.selectPhotoButton.setImage(image, for: .normal)
+        registrationViewModel.bindableImage.bind { [unowned self] (img) in self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
-
-        registrationViewModel.bindableIsRegistering.bind { [weak self] isRegistering in
+        registrationViewModel.bindableIsRegistering.bind { [unowned self] (isRegistering) in
             if isRegistering == true {
-                self?.registeringHud.show(in: self?.view ?? UIView())
-                self?.registeringHud.textLabel.text = "Registering"
+                self.registeringHUD.textLabel.text = "Register"
+                self.registeringHUD.show(in: self.view)
             } else {
-                self?.registeringHud.dismiss()
+                self.registeringHUD.dismiss()
             }
         }
     }
 
     fileprivate func setupTapGesture() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
     }
 
-    @objc fileprivate func dismissKeyboard() {
-        view.endEditing(true)
+    @objc fileprivate func handleTapDismiss() {
+        self.view.endEditing(true) // dismisses keyboard
     }
 
-    fileprivate func setupNotificationObserver() {
+    fileprivate func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillDismiss), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    @objc fileprivate func handleKeyboardShow(notification: Notification) {
-        guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        let keyboardFrame = value.cgRectValue
-
-        let bottomSpace = view.frame.height - overallStackView.frame.origin.y - overallStackView.frame.height
-
-        let difference = keyboardFrame.height - bottomSpace
-        self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //        NotificationCenter.default.removeObserver(self) // you'll have a retain cycle
     }
 
-    @objc fileprivate func handleKeyboardWillDismiss(notification: Notification) {
+    @objc fileprivate func handleKeyboardHide() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.transform = .identity
         })
     }
 
-    fileprivate func setupGradientLayer() {
-        let topColor = #colorLiteral(red: 0.9893777966, green: 0.347874403, blue: 0.382784009, alpha: 1)
-        let bottomColor = #colorLiteral(red: 0.9005830884, green: 0.127312541, blue: 0.4597411752, alpha: 1)
-        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
-        gradientLayer.locations = [0, 1]
-        view.layer.addSublayer(gradientLayer)
+    @objc fileprivate func handleKeyboardShow(notification: Notification) {
+        // how to figure out how tall the keyboard actually is
+        guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardFrame = value.cgRectValue
+        print(keyboardFrame)
+
+        // let's try to figure out how tall the gap is from the register button to the bottom of the screen
+        let bottomSpace = view.frame.height - overallStackView.frame.origin.y - overallStackView.frame.height
+        print(bottomSpace)
+
+        let difference = keyboardFrame.height - bottomSpace
+        self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
     }
-    //check if landscape vs portrait
+
+    lazy var verticalStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [
+            fullNameTextField,
+            emailTextField,
+            passwordTextField,
+            registerButton
+            ])
+        sv.axis = .vertical
+        sv.spacing = 8
+        return sv
+    }()
+
+    lazy var overallStackView = UIStackView(arrangedSubviews: [
+        selectPhotoButton,
+        verticalStackView
+        ])
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if self.traitCollection.verticalSizeClass == .compact {
             overallStackView.axis = .horizontal
+            verticalStackView.distribution = .fillEqually
+            selectPhotoButtonHeightAnchor.isActive = false
+            selectPhotoButtonWidthAnchor.isActive = true
         } else {
             overallStackView.axis = .vertical
+            verticalStackView.distribution = .fill
+            selectPhotoButtonWidthAnchor.isActive = false
+            selectPhotoButtonHeightAnchor.isActive = true
         }
     }
 
+    let goToLoginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Go to Login", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        button.addTarget(self, action: #selector(handleGoToLogin), for: .touchUpInside)
+        return button
+    }()
+
+    @objc fileprivate func handleGoToLogin() {
+        let loginController = LoginController()
+        loginController.delegate = delegate
+        navigationController?.pushViewController(loginController, animated: true)
+    }
+
     fileprivate func setupLayout() {
+        navigationController?.isNavigationBarHidden = true
+
         view.addSubview(overallStackView)
-        selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
+
+        overallStackView.axis = .vertical
         overallStackView.spacing = 8
         overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+
+        view.addSubview(goToLoginButton)
+        goToLoginButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
     }
+
+    let gradientLayer = CAGradientLayer()
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        gradientLayer.frame = view.bounds
+    }
+
+    fileprivate func setupGradientLayer() {
+
+        let topColor = #colorLiteral(red: 0.9921568627, green: 0.3568627451, blue: 0.3725490196, alpha: 1)
+        let bottomColor = #colorLiteral(red: 0.8980392157, green: 0, blue: 0.4470588235, alpha: 1)
+        // make sure to user cgColor
+        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
+        gradientLayer.locations = [0, 1]
+        view.layer.addSublayer(gradientLayer)
+        gradientLayer.frame = view.bounds
+    }
+
 }
 
-extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[.originalImage] as? UIImage
-        registrationViewModel.bindableImage.value = image?.withRenderingMode(.alwaysOriginal)
-        dismiss(animated: true)
-    }
-
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true)
-    }
-}
