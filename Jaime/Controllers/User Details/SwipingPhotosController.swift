@@ -10,21 +10,23 @@ import UIKit
 
 class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSource {
 
-    let controllers = [
-        PhotoController(image: #imageLiteral(resourceName: "aGirl4")),
-        PhotoController(image: #imageLiteral(resourceName: "aGirl2")),
-        PhotoController(image: #imageLiteral(resourceName: "aGirl3")),
-        PhotoController(image: #imageLiteral(resourceName: "kelly4")),
-        PhotoController(image: #imageLiteral(resourceName: "like_circle"))
-    ]
+    var cardViewModel: CardViewModel! {
+        didSet {
+            controllers = cardViewModel.imageUrls.map({ (imageURL) -> UIViewController in
+                let photoController = PhotoController(imageUrl: imageURL)
+                return photoController
+            })
+            setViewControllers([controllers.first!], direction: .forward, animated: false)
+        }
+    }
+
+    var controllers = [UIViewController]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
         view.backgroundColor = .white
-        setViewControllers([controllers.first!], direction: .forward, animated: false)
     }
-
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let index = self.controllers.firstIndex(where: {$0 == viewController}) ?? 0
@@ -44,8 +46,11 @@ class PhotoController: UIViewController {
 
     let imageView = UIImageView(image: #imageLiteral(resourceName: "aGirl4"))
 
-    init(image: UIImage) {
-        self.imageView.image = image
+    init(imageUrl: String) {
+
+        if let url = URL(string: imageUrl) {
+            imageView.sd_setImage(with: url)
+        }
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -57,7 +62,7 @@ class PhotoController: UIViewController {
         super.viewDidLoad()
         view.addSubview(imageView)
         imageView.fillSuperview()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
 
     }
 
