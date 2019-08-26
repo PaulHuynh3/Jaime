@@ -99,8 +99,9 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         }
     }
 
-    func didTapMoreInfo() {
+    func didTapMoreInfo(cardViewModel: CardViewModel) {
         let userDetailsController = UserDetailsControllerViewController()
+        userDetailsController.cardViewModel = cardViewModel
         present(userDetailsController, animated: true)
     }
 

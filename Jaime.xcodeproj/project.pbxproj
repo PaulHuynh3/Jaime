@@ -28,6 +28,7 @@
 		EB2C66CD22C02B8900332D3B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C66CC22C02B8900332D3B /* RegistrationViewController.swift */; };
 		EB2C66CF22C05B5900332D3B /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C66CE22C05B5900332D3B /* CustomTextfield.swift */; };
 		EB3CBE21231334C200979268 /* UserDetailsControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */; };
+		EB3CBE23231376AB00979268 /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */; };
 		EBCB41C922C32788007C2A1B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */; };
 		EBD239BE23130EFB00F021A1 /* Firebase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD239BD23130EFB00F021A1 /* Firebase+Utils.swift */; };
 		EBD239C1231319ED00F021A1 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD239C0231319ED00F021A1 /* LoginController.swift */; };
@@ -60,6 +61,7 @@
 		EB2C66CC22C02B8900332D3B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		EB2C66CE22C05B5900332D3B /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
 		EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsControllerViewController.swift; sourceTree = "<group>"; };
+		EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		EBD239BD23130EFB00F021A1 /* Firebase+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Utils.swift"; sourceTree = "<group>"; };
 		EBD239C0231319ED00F021A1 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */,
+				EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */,
 			);
 			path = "User Details";
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				DA3ED8BA22B5FB15001E47D5 /* TopNavigationStackView.swift in Sources */,
 				EBD239C3231319F800F021A1 /* LoginViewModel.swift in Sources */,
 				DA3ED8BF22B6EFB4001E47D5 /* User.swift in Sources */,
+				EB3CBE23231376AB00979268 /* SwipingPhotosController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

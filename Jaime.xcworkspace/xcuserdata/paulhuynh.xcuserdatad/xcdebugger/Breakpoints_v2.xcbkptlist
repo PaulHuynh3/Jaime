@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Jaime/Views/CardView.swift"
-            timestampString = "588462923.327296"
+            timestampString = "588477944.89627"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "157"
@@ -26,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Jaime/Views/CardView.swift"
-            timestampString = "588462923.3273489"
+            timestampString = "588477944.896324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
             endingLineNumber = "150"
-            landmarkName = "handlePan(gesture:)"
-            landmarkType = "7">
+            landmarkName = "CardView"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -74,7 +74,7 @@
                   moduleName = "Jaime"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/paulhuynh/Desktop/Projects/Jaime/Jaime/Controllers/Login/LoginController.swift"
-                  timestampString = "588462923.508016"
+                  timestampString = "588477944.954448"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "69"
@@ -89,7 +89,7 @@
                   moduleName = "Jaime"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/paulhuynh/Desktop/Projects/Jaime/Jaime/Controllers/Login/LoginController.swift"
-                  timestampString = "588462923.509496"
+                  timestampString = "588477944.9566129"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"

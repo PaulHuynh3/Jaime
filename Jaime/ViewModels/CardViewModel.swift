@@ -15,19 +15,19 @@ protocol ProducesCardViewModel {
 
 class CardViewModel {
     //define properties that view will display/render
-    let imageNames: [String]
+    let imageUrls: [String]
     let attributedString: NSAttributedString
     let textAllignment: NSTextAlignment
 
     init(imageNames: [String], attributedString: NSAttributedString, textAllignment: NSTextAlignment) {
-        self.imageNames = imageNames
+        self.imageUrls = imageNames
         self.attributedString = attributedString
         self.textAllignment = textAllignment
     }
 
     fileprivate var imageIndex = 0 {
         didSet {
-            let imageUrl = imageNames[imageIndex]
+            let imageUrl = imageUrls[imageIndex]
             imageTappedCallback?(imageUrl, imageIndex)
         }
     }
@@ -35,7 +35,7 @@ class CardViewModel {
     var imageTappedCallback: ((String?, Int) -> ())?
 
     func showNextPicture() {
-        imageIndex = min(imageIndex + 1, imageNames.count - 1)
+        imageIndex = min(imageIndex + 1, imageUrls.count - 1)
     }
 
     func showPreviousPicture() {
