@@ -23,6 +23,7 @@
 		DABBEAD522B593770025A6B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABBEAD322B593770025A6B7 /* Main.storyboard */; };
 		DABBEAD722B593780025A6B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DABBEAD622B593780025A6B7 /* Assets.xcassets */; };
 		DABBEADA22B593780025A6B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABBEAD822B593780025A6B7 /* LaunchScreen.storyboard */; };
+		EB091168231C60DC00670FDA /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB091167231C60DC00670FDA /* PhotoController.swift */; };
 		EB1D60CE22DBCB180054683A /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D60CD22DBCB180054683A /* Bindable.swift */; };
 		EB1F718722DAB62F00880333 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB1F718622DAB62F00880333 /* GoogleService-Info.plist */; };
 		EB2C66CD22C02B8900332D3B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C66CC22C02B8900332D3B /* RegistrationViewController.swift */; };
@@ -56,6 +57,7 @@
 		DABBEAD622B593780025A6B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DABBEAD922B593780025A6B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DABBEADB22B593780025A6B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB091167231C60DC00670FDA /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		EB1D60CD22DBCB180054683A /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		EB1F718622DAB62F00880333 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB2C66CC22C02B8900332D3B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */,
 				EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */,
+				EB091167231C60DC00670FDA /* PhotoController.swift */,
 			);
 			path = "User Details";
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				DA3ED8B522B5E676001E47D5 /* Extensions+UIView.swift in Sources */,
 				EBD239C1231319ED00F021A1 /* LoginController.swift in Sources */,
 				DA712EA722B730D5009D6471 /* CardViewModel.swift in Sources */,
+				EB091168231C60DC00670FDA /* PhotoController.swift in Sources */,
 				DA3ED8BC22B6BEFE001E47D5 /* CardView.swift in Sources */,
 				DA3ED8BA22B5FB15001E47D5 /* TopNavigationStackView.swift in Sources */,
 				EBD239C3231319F800F021A1 /* LoginViewModel.swift in Sources */,

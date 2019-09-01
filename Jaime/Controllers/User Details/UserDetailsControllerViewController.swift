@@ -28,8 +28,7 @@ class UserDetailsControllerViewController: UIViewController, UIScrollViewDelegat
         return sv
     }()
 
-    //put the pagecontroller for paging viewcontrollers (images)
-    let swipingPhotosController = SwipingPhotosController(transitionStyle: .pageCurl, navigationOrientation: .horizontal)
+    let swipingPhotosController = SwipingPhotosController()
 
     let infoLabel: UILabel = {
         let label = UILabel()

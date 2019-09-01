@@ -69,13 +69,8 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     var lastFetchedUser: User?
 
     fileprivate func fetchUsersFromFirestore() {
-        var minSeekingAge = 18
-        var maxSeekingAge = 30
-
-        if let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge {
-            minSeekingAge = minAge
-            maxSeekingAge = maxAge
-        }
+        let minSeekingAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMinSeekingAge
+        let maxSeekingAge = user?.maxSeekingAge ?? SettingsTableViewController.defaultMaxSeekingAge
 
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minSeekingAge).whereField("age", isLessThanOrEqualTo: maxSeekingAge)
         query.getDocuments { (snapshot, err) in
