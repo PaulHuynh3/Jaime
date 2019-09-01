@@ -43,13 +43,10 @@ class CardView: UIView {
 
     fileprivate func setupImageCallback() {
         cardViewModel.imageTappedCallback = { [weak self] imageUrl, index in
-//            if let url = URL(string: imageUrl ?? "") {
-//                self?.imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "app_icon"), options: .continueInBackground)
-//            }
-            self?.barsStackView.arrangedSubviews.forEach({ (view) in
-                view.backgroundColor = self?.barDeselectedColour
+            self?.barsStackView.arrangedSubviews.forEach({ (v) in
+                v.backgroundColor = self?.barDeselectedColour
             })
-            self?.barsStackView.subviews[index].backgroundColor = .white
+            self?.barsStackView.arrangedSubviews[index].backgroundColor = .white
         }
     }
     
