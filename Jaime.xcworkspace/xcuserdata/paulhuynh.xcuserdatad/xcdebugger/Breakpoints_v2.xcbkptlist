@@ -6,38 +6,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jaime/Views/CardView.swift"
-            timestampString = "589087744.807407"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "handleChanged(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jaime/Views/CardView.swift"
-            timestampString = "589087744.807466"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "CardView"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -74,7 +42,7 @@
                   moduleName = "Jaime"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/paulhuynh/Desktop/Projects/Jaime/Jaime/Controllers/Login/LoginController.swift"
-                  timestampString = "589087745.015066"
+                  timestampString = "589090282.445547"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "69"
@@ -89,7 +57,7 @@
                   moduleName = "Jaime"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/paulhuynh/Desktop/Projects/Jaime/Jaime/Controllers/Login/LoginController.swift"
-                  timestampString = "589087745.016609"
+                  timestampString = "589090282.446924"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"

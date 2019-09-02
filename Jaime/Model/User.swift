@@ -37,7 +37,7 @@ struct User: ProducesCardViewModel {
 
         let ageString = age != nil ? "\(age!)" : "N\\A"
 
-        attrubutedText.append(NSAttributedString(string: "\(ageString)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular), .foregroundColor: UIColor.white]))
+        attrubutedText.append(NSAttributedString(string: "    \(ageString)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular), .foregroundColor: UIColor.white]))
 
         let professionString = profession != nil ? profession! : "Not available"
         attrubutedText.append(NSAttributedString(string: "\n\(professionString)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular), .foregroundColor: UIColor.white]))
