@@ -22,10 +22,6 @@ class CardView: UIView {
 
     var cardViewModel: CardViewModel! {
         didSet{
-//            let imageName = cardViewModel.imageUrls.first ?? ""
-//            if let url = URL(string: imageName) {
-//                imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "app_icon"), options: .continueInBackground)
-//            }
             swipingPhotosController.cardViewModel = self.cardViewModel
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAllignment
@@ -158,22 +154,38 @@ class CardView: UIView {
         let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
         
         let shouldDismissCard = abs(gesture.translation(in: nil).x) > threshold
-        
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
-            
-            if shouldDismissCard {
-                self.frame = CGRect(x: 1000 * translationDirection, y: 0, width: self.frame.width, height: self.frame.height)
+
+        if shouldDismissCard {
+            // hack solution
+            guard let homeController = self.delegate as? HomeController else { return }
+
+            if translationDirection == 1 {
+                homeController.handleLike()
             } else {
+                homeController.handleDislike()
+            }
+        } else {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
                 self.transform = .identity
-            }
-        }) { (_) in
-            //arrange the view back to its original position
-            self.transform = .identity
-            if shouldDismissCard {
-               self.removeFromSuperview()
-                self.delegate?.didRemoveCard(cardView: self)
-            }
+            })
         }
+
+        
+//        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+//
+//            if shouldDismissCard {
+//                self.frame = CGRect(x: 1000 * translationDirection, y: 0, width: self.frame.width, height: self.frame.height)
+//            } else {
+//                self.transform = .identity
+//            }
+//        }) { (_) in
+//            //arrange the view back to its original position
+//            self.transform = .identity
+//            if shouldDismissCard {
+//               self.removeFromSuperview()
+//                self.delegate?.didRemoveCard(cardView: self)
+//            }
+//        }
     }
 
 }
