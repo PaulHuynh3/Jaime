@@ -178,6 +178,26 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
             let hasMatched = data[uid] as? Int == 1
             if hasMatched {
                 self.presentMatchView(cardUID: cardUID)
+
+                //save data to firestore
+                guard let cardUser = self.users[cardUID] else { return }
+
+                let data: [String: Any] = ["name": cardUser.name ?? "", "profileImageUrl": cardUser.imageUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
+                Firestore.firestore().collection("matches_messages").document(uid).collection("matches").document(cardUID).setData(data, completion: { (err) in
+                    if let err = err {
+                        print("Faled to save matched info", err)
+                    }
+                })
+
+                //Handle seeing the matched users when current user logs out...
+                guard let currentUser = self.user else { return }
+
+                let otherMatchData: [String: Any] = ["name": currentUser.name ?? "", "profileImageUrl": currentUser.imageUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
+                Firestore.firestore().collection("matches_messages").document(cardUID).collection("matches").document(uid).setData(otherMatchData, completion: { (err) in
+                    if let err = err {
+                        print("Faled to save matched info", err)
+                    }
+                })
             }
         }
     }
@@ -206,7 +226,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         let minSeekingAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMinSeekingAge
         let maxSeekingAge = user?.maxSeekingAge ?? SettingsTableViewController.defaultMaxSeekingAge
 
-        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minSeekingAge).whereField("age", isLessThanOrEqualTo: maxSeekingAge)
+        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minSeekingAge).whereField("age", isLessThanOrEqualTo: maxSeekingAge).limit(to: 10)
         topCardView = nil
         query.getDocuments { (snapshot, err) in
             self.hud.dismiss()
@@ -215,12 +235,13 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
                 return
             }
 
+            //Linked List
             var previousCardView: CardView?
 
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
-
+                self.users[user.uid ?? ""] = user
                 let isNotCurrentUser = user.uid != Auth.auth().currentUser?.uid
 //                let hasNotSwipedBefore = self.swipes[user.uid!] == nil
                 let hasNotSwipedBefore = true
@@ -237,6 +258,8 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
             })
         }
     }
+
+    var users = [String: User]()
 
     func didTapMoreInfo(cardViewModel: CardViewModel) {
         let userDetailsController = UserDetailsControllerViewController()
