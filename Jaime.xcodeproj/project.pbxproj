@@ -37,6 +37,7 @@
 		EBD239C1231319ED00F021A1 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD239C0231319ED00F021A1 /* LoginController.swift */; };
 		EBD239C3231319F800F021A1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD239C2231319F800F021A1 /* LoginViewModel.swift */; };
 		EBEC4EBC231DDE7C00AB6891 /* MatchesMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEC4EBB231DDE7C00AB6891 /* MatchesMessagesController.swift */; };
+		EBEC4EBE231DE55900AB6891 /* MatchesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		EBD239C0231319ED00F021A1 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		EBD239C2231319F800F021A1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EBEC4EBB231DDE7C00AB6891 /* MatchesMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesController.swift; sourceTree = "<group>"; };
+		EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				EB091169231CC7DD00670FDA /* MatchView.swift */,
 				EB09116B231CD21700670FDA /* SendMessageButton.swift */,
 				EB09116D231CD50C00670FDA /* KeepSwipingButton.swift */,
+				EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				EB09116C231CD21700670FDA /* SendMessageButton.swift in Sources */,
 				DA3ED8BF22B6EFB4001E47D5 /* User.swift in Sources */,
 				EB3CBE23231376AB00979268 /* SwipingPhotosController.swift in Sources */,
+				EBEC4EBE231DE55900AB6891 /* MatchesNavBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
