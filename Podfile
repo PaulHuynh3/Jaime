@@ -12,5 +12,6 @@ target 'Jaime' do
   pod 'SDWebImage'
   pod 'JGProgressHUD'
   pod 'GoogleAppMeasurement'
+  pod 'LBTATools'
 
 end

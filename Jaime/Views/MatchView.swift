@@ -105,7 +105,7 @@ class MatchView: UIView {
         keepSwipingButton.transform = CGAffineTransform(translationX: 500, y: 0)
 
         UIView.animateKeyframes(withDuration: 1.3, delay: 0, options: .calculationModeCubic, animations: {
-            //animation 1 - translation to original position
+            //animation 1 - translation to offset position
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.45, animations: {
                 self.currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle)
                 self.cardUserImageView.transform = CGAffineTransform(rotationAngle: angle)
