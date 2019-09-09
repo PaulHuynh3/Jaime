@@ -42,7 +42,7 @@
                   moduleName = "Jaime"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/paulhuynh/Desktop/Projects/Jaime/Jaime/Controllers/Login/LoginController.swift"
-                  timestampString = "589685987.473068"
+                  timestampString = "589686273.4680049"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "69"
@@ -57,7 +57,7 @@
                   moduleName = "Jaime"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/paulhuynh/Desktop/Projects/Jaime/Jaime/Controllers/Login/LoginController.swift"
-                  timestampString = "589685987.474825"
+                  timestampString = "589686273.4701"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"
@@ -81,22 +81,6 @@
             endingLineNumber = "78"
             landmarkName = "handleLogin()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jaime/Controllers/MatchesMessages/ChatLogController.swift"
-            timestampString = "589685987.281224"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "item"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

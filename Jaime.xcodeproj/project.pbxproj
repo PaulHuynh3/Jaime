@@ -38,6 +38,8 @@
 		EBD239C3231319F800F021A1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD239C2231319F800F021A1 /* LoginViewModel.swift */; };
 		EBE0416C2325BB6B00971D6E /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0416B2325BB6B00971D6E /* ChatLogController.swift */; };
 		EBE0416F2325D25D00971D6E /* MessagesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */; };
+		EBE041712325E58100971D6E /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE041702325E58100971D6E /* Messages.swift */; };
+		EBE041732325E5D500971D6E /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE041722325E5D500971D6E /* MessageCell.swift */; };
 		EBEC4EBC231DDE7C00AB6891 /* MatchesMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEC4EBB231DDE7C00AB6891 /* MatchesMessagesController.swift */; };
 		EBEC4EBE231DE55900AB6891 /* MatchesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +80,8 @@
 		EBD239C2231319F800F021A1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EBE0416B2325BB6B00971D6E /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesNavBar.swift; sourceTree = "<group>"; };
+		EBE041702325E58100971D6E /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		EBE041722325E5D500971D6E /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		EBEC4EBB231DDE7C00AB6891 /* MatchesMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesController.swift; sourceTree = "<group>"; };
 		EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +146,7 @@
 			children = (
 				DA3ED8BE22B6EFB4001E47D5 /* User.swift */,
 				DA01FC1022B73E5500D98501 /* Advertiser.swift */,
+				EBE041702325E58100971D6E /* Messages.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */,
+				EBE041722325E5D500971D6E /* MessageCell.swift */,
 			);
 			path = MatchesMessages;
 			sourceTree = "<group>";
@@ -361,12 +367,14 @@
 				EB3CBE21231334C200979268 /* UserDetailsControllerViewController.swift in Sources */,
 				EB1D60CE22DBCB180054683A /* Bindable.swift in Sources */,
 				DABBEAD222B593770025A6B7 /* HomeController.swift in Sources */,
+				EBE041712325E58100971D6E /* Messages.swift in Sources */,
 				EBCB41C922C32788007C2A1B /* RegistrationViewModel.swift in Sources */,
 				EBE0416F2325D25D00971D6E /* MessagesNavBar.swift in Sources */,
 				DAA54B6522E553EB00518908 /* AgeRangeTableViewCell.swift in Sources */,
 				DA3ED8B822B5F3B4001E47D5 /* HomeBottomControlsStackView.swift in Sources */,
 				DA01FC1122B73E5500D98501 /* Advertiser.swift in Sources */,
 				DABBEAD022B593770025A6B7 /* AppDelegate.swift in Sources */,
+				EBE041732325E5D500971D6E /* MessageCell.swift in Sources */,
 				EB09116E231CD50C00670FDA /* KeepSwipingButton.swift in Sources */,
 				EB09116A231CC7DD00670FDA /* MatchView.swift in Sources */,
 				DAA54B6122E4FD5300518908 /* SettingsTableViewController.swift in Sources */,
