@@ -26,7 +26,7 @@ class MessageCell: LBTAListCell<Message> {
         didSet {
             textView.text = item.text
 
-            if item.isMessageFromCurrentLoggedUser {
+            if item.isFromCurrentLoggedUser {
                 //messages on right
                 anchoredConstraints.trailing?.isActive = true
                 anchoredConstraints.leading?.isActive = false

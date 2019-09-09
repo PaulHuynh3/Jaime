@@ -191,8 +191,8 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
 
                 //Handle seeing the matched users when current user logs out...
                 guard let currentUser = self.user else { return }
-
-                let otherMatchData: [String: Any] = ["name": currentUser.name ?? "", "profileImageUrl": currentUser.imageUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
+ 
+                let otherMatchData: [String: Any] = ["name": currentUser.name ?? "", "profileImageUrl": currentUser.imageUrl1 ?? "", "uid": currentUser.uid ?? "", "timestamp": Timestamp(date: Date())]
                 Firestore.firestore().collection("matches_messages").document(cardUID).collection("matches").document(uid).setData(otherMatchData, completion: { (err) in
                     if let err = err {
                         print("Faled to save matched info", err)

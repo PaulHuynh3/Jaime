@@ -40,6 +40,7 @@
 		EBE0416F2325D25D00971D6E /* MessagesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */; };
 		EBE041712325E58100971D6E /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE041702325E58100971D6E /* Messages.swift */; };
 		EBE041732325E5D500971D6E /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE041722325E5D500971D6E /* MessageCell.swift */; };
+		EBE041752325EBBB00971D6E /* CustomInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE041742325EBBB00971D6E /* CustomInputAccessoryView.swift */; };
 		EBEC4EBC231DDE7C00AB6891 /* MatchesMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEC4EBB231DDE7C00AB6891 /* MatchesMessagesController.swift */; };
 		EBEC4EBE231DE55900AB6891 /* MatchesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 		EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesNavBar.swift; sourceTree = "<group>"; };
 		EBE041702325E58100971D6E /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		EBE041722325E5D500971D6E /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		EBE041742325EBBB00971D6E /* CustomInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccessoryView.swift; sourceTree = "<group>"; };
 		EBEC4EBB231DDE7C00AB6891 /* MatchesMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesController.swift; sourceTree = "<group>"; };
 		EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,6 +236,7 @@
 			children = (
 				EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */,
 				EBE041722325E5D500971D6E /* MessageCell.swift */,
+				EBE041742325EBBB00971D6E /* CustomInputAccessoryView.swift */,
 			);
 			path = MatchesMessages;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				EBE041732325E5D500971D6E /* MessageCell.swift in Sources */,
 				EB09116E231CD50C00670FDA /* KeepSwipingButton.swift in Sources */,
 				EB09116A231CC7DD00670FDA /* MatchView.swift in Sources */,
+				EBE041752325EBBB00971D6E /* CustomInputAccessoryView.swift in Sources */,
 				DAA54B6122E4FD5300518908 /* SettingsTableViewController.swift in Sources */,
 				EB2C66CF22C05B5900332D3B /* CustomTextfield.swift in Sources */,
 				EBD239BE23130EFB00F021A1 /* Firebase+Utils.swift in Sources */,

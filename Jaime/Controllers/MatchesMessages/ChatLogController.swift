@@ -7,6 +7,7 @@
 //
 
 import LBTATools
+import Firebase
 
 class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionViewDelegateFlowLayout {
 
@@ -21,61 +22,48 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         super.init()
     }
 
-    // input accessory view
-
-    class CustomInputAccessoryView: UIView {
-
-        let textView = UITextView()
-        let sendButton = UIButton(title: "SEND", titleColor: .black, font: .boldSystemFont(ofSize: 14), target: nil, action: nil)
-
-        let placeholderLabel = UILabel(text: "Enter Message", font: .systemFont(ofSize: 16), textColor: .lightGray)
-
-        override var intrinsicContentSize: CGSize {
-            return .zero
-        }
-
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-            backgroundColor = .white
-            setupShadow(opacity: 0.1, radius: 8, offset: .init(width: 0, height: -8), color: .lightGray)
-            autoresizingMask = .flexibleHeight
-
-            textView.isScrollEnabled = false
-            textView.font = .systemFont(ofSize: 16)
-
-            NotificationCenter.default.addObserver(self, selector: #selector(handleTextChange), name: UITextView.textDidChangeNotification, object: nil)
-
-            hstack(textView,
-                   sendButton.withSize(.init(width: 60, height: 60)),
-                   alignment: .center
-                ).withMargins(.init(top: 0, left: 16, bottom: 0, right: 16))
-
-            addSubview(placeholderLabel)
-            placeholderLabel.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: sendButton.leadingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 0))
-            placeholderLabel.centerYAnchor.constraint(equalTo: sendButton.centerYAnchor).isActive = true
-        }
-
-        @objc fileprivate func handleTextChange() {
-            placeholderLabel.isHidden = textView.text.count != 0
-        }
-
-        deinit {
-            NotificationCenter.default.removeObserver(self)
-        }
-
-        required init?(coder aDecoder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-
-    }
-
-    lazy var redView: UIView = {
-        return CustomInputAccessoryView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50))
+    lazy var customInputView: CustomInputAccessoryView = {
+        let civ = CustomInputAccessoryView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50))
+        civ.sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+        return civ
     }()
+
+    @objc fileprivate func handleSend() {
+        print(customInputView.textView.text ?? "")
+
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        let collection = Firestore.firestore().collection("matches_messages").document(currentUserId).collection(match.uid)
+
+        let data = ["text": customInputView.textView.text ?? "", "fromId": currentUserId, "toId": match.uid, "timestamp": Timestamp(date: Date())] as [String : Any]
+
+        collection.addDocument(data: data) { (err) in
+            if let err = err {
+                print("Failed to save message:", err)
+                return
+            }
+
+            print("Successfully saved msg into Firestore")
+            self.customInputView.textView.text = nil
+            self.customInputView.placeholderLabel.isHidden = false
+        }
+
+        let toCollection = Firestore.firestore().collection("matches_messages").document(match.uid).collection(currentUserId)
+
+        toCollection.addDocument(data: data) { (err) in
+            if let err = err {
+                print("Failed to save message:", err)
+                return
+            }
+
+            print("Successfully saved msg into Firestore")
+            self.customInputView.textView.text = nil
+            self.customInputView.placeholderLabel.isHidden = false
+        }
+    }
 
     override var inputAccessoryView: UIView? {
         get {
-            return redView
+            return customInputView
         }
     }
 
@@ -83,19 +71,44 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         return true
     }
 
+    fileprivate func fetchMessages() {
+        print("Fetching messages")
+
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+
+        let query = Firestore.firestore().collection("matches_messages").document(currentUserId).collection(match.uid).order(by: "timestamp")
+
+        query.addSnapshotListener { (querySnapshot, err) in
+            if let err = err {
+                print("Failed to fetch messages:", err)
+                return
+            }
+
+            querySnapshot?.documentChanges.forEach({ (change) in
+                if change.type == .added {
+                    let dictionary = change.document.data()
+                    self.items.append(.init(dictionary: dictionary))
+                }
+            })
+            self.collectionView.reloadData()
+            self.collectionView.scrollToItem(at: [0, self.items.count - 1], at: .bottom, animated: true)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+
         collectionView.keyboardDismissMode = .interactive
 
-        items = [
-            .init(text: "In this lesson, let's cover some more abstract topics related to code architecture. These two topics will be View Model View State and Reactive Programming.  For those that are unfamiliar with these concepts, it'll sound somewhat intimidating at first but in reality its not too complicated.", isMessageFromCurrentLoggedUser: true),
-            .init(text: "Hello bud", isMessageFromCurrentLoggedUser: false),
-            .init(text: "Hello from the Tinder Course", isMessageFromCurrentLoggedUser: true),
-            .init(text: "First we'll identify the areas of our code in which we can apply the abstraction. Next I'll go over how we can pull out some logic and plop it inside of our View Model that is supposed to keep track of the state of our views.", isMessageFromCurrentLoggedUser: false)
-        ]
+        fetchMessages()
 
         setupUI()
+    }
+
+    @objc fileprivate func handleKeyboardShow() {
+        self.collectionView.scrollToItem(at: [0, items.count - 1], at: .bottom, animated: true)
     }
 
     fileprivate func setupUI() {
