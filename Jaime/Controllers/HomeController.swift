@@ -309,4 +309,3 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     }
 
 }
-

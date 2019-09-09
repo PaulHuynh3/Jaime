@@ -81,6 +81,7 @@ class MatchView: UIView {
     fileprivate let keepSwipingButton: KeepSwipingButton = {
         let button = KeepSwipingButton(type: .system)
         button.setTitle("Keep Swiping", for: .normal)
+        button.addTarget(self, action: #selector(handleTapDismiss), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
@@ -192,5 +193,4 @@ class MatchView: UIView {
             self.removeFromSuperview()
         }
     }
-
 }
