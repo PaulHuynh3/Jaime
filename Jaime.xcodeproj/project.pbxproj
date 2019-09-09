@@ -36,6 +36,8 @@
 		EBD239BE23130EFB00F021A1 /* Firebase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD239BD23130EFB00F021A1 /* Firebase+Utils.swift */; };
 		EBD239C1231319ED00F021A1 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD239C0231319ED00F021A1 /* LoginController.swift */; };
 		EBD239C3231319F800F021A1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD239C2231319F800F021A1 /* LoginViewModel.swift */; };
+		EBE0416C2325BB6B00971D6E /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0416B2325BB6B00971D6E /* ChatLogController.swift */; };
+		EBE0416F2325D25D00971D6E /* MessagesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */; };
 		EBEC4EBC231DDE7C00AB6891 /* MatchesMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEC4EBB231DDE7C00AB6891 /* MatchesMessagesController.swift */; };
 		EBEC4EBE231DE55900AB6891 /* MatchesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */; };
 /* End PBXBuildFile section */
@@ -74,6 +76,8 @@
 		EBD239BD23130EFB00F021A1 /* Firebase+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Utils.swift"; sourceTree = "<group>"; };
 		EBD239C0231319ED00F021A1 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		EBD239C2231319F800F021A1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		EBE0416B2325BB6B00971D6E /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
+		EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesNavBar.swift; sourceTree = "<group>"; };
 		EBEC4EBB231DDE7C00AB6891 /* MatchesMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesController.swift; sourceTree = "<group>"; };
 		EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,6 +122,7 @@
 		DA3ED8B622B5F37E001E47D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EBE0416D2325D22D00971D6E /* MatchesMessages */,
 				DA3ED8B722B5F3B4001E47D5 /* HomeBottomControlsStackView.swift */,
 				DA3ED8B922B5FB15001E47D5 /* TopNavigationStackView.swift */,
 				DA3ED8BB22B6BEFE001E47D5 /* CardView.swift */,
@@ -219,10 +224,19 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		EBE0416D2325D22D00971D6E /* MatchesMessages */ = {
+			isa = PBXGroup;
+			children = (
+				EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */,
+			);
+			path = MatchesMessages;
+			sourceTree = "<group>";
+		};
 		EBEC4EBA231DDE5900AB6891 /* MatchesMessages */ = {
 			isa = PBXGroup;
 			children = (
 				EBEC4EBB231DDE7C00AB6891 /* MatchesMessagesController.swift */,
+				EBE0416B2325BB6B00971D6E /* ChatLogController.swift */,
 			);
 			path = MatchesMessages;
 			sourceTree = "<group>";
@@ -343,10 +357,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE0416C2325BB6B00971D6E /* ChatLogController.swift in Sources */,
 				EB3CBE21231334C200979268 /* UserDetailsControllerViewController.swift in Sources */,
 				EB1D60CE22DBCB180054683A /* Bindable.swift in Sources */,
 				DABBEAD222B593770025A6B7 /* HomeController.swift in Sources */,
 				EBCB41C922C32788007C2A1B /* RegistrationViewModel.swift in Sources */,
+				EBE0416F2325D25D00971D6E /* MessagesNavBar.swift in Sources */,
 				DAA54B6522E553EB00518908 /* AgeRangeTableViewCell.swift in Sources */,
 				DA3ED8B822B5F3B4001E47D5 /* HomeBottomControlsStackView.swift in Sources */,
 				DA01FC1122B73E5500D98501 /* Advertiser.swift in Sources */,
