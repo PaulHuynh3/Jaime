@@ -9,42 +9,20 @@
 import LBTATools
 import Firebase
 
-struct Match {
-    let name, profileImageUrl, uid: String
+class MatchesMessagesController: LBTAListHeaderController<MatchCell, Match, MatchesHeader>, UICollectionViewDelegateFlowLayout {
 
-    init(dictionary: [String: Any]) {
-        self.name = dictionary["name"] as? String ?? ""
-        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
-        self.uid = dictionary["uid"] as? String ?? ""
-    }
-}
-
-class MatchCell: LBTAListCell<Match> {
-
-    let profileImageView = UIImageView(image: #imageLiteral(resourceName: "kelly1"), contentMode: .scaleAspectFill)
-    let usernameLabel = UILabel(text: "Username Here", font: .systemFont(ofSize: 14, weight: .semibold), textColor: #colorLiteral(red: 0.2550676465, green: 0.2552897036, blue: 0.2551020384, alpha: 1), textAlignment: .center, numberOfLines: 2)
-
-    override var item: Match! {
-        didSet {
-            usernameLabel.text = item.name
-            profileImageView.sd_setImage(with: URL(string: item.profileImageUrl))
-        }
+    override func setupHeader(_ header: MatchesHeader) {
+        header.matchesHorizontalController.rootMatchesController = self
     }
 
-    override func setupViews() {
-        super.setupViews()
-
-        profileImageView.clipsToBounds = true
-        profileImageView.constrainWidth(80)
-        profileImageView.constrainHeight(80)
-        profileImageView.layer.cornerRadius = 80 / 2
-
-        stack(stack(profileImageView, alignment: .center),
-              usernameLabel)
+    func didSelectMatchFromHeader(match: Match) {
+        let chatLogController = ChatLogController(match: match)
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
-}
 
-class MatchesMessagesController: LBTAListController<MatchCell, Match>, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: 250)
+    }
 
     let customNavBar = MatchesNavBar()
 
