@@ -34,6 +34,7 @@
 		EB2F3CEB232ECB4E005C8983 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F3CEA232ECB4E005C8983 /* Match.swift */; };
 		EB2F3CED232ED3F0005C8983 /* MatchesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F3CEC232ED3F0005C8983 /* MatchesHorizontalController.swift */; };
 		EB2F3CEF232ED575005C8983 /* MatchesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F3CEE232ED575005C8983 /* MatchesHeader.swift */; };
+		EB2F3CF1232EE8D6005C8983 /* RecentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F3CF0232EE8D6005C8983 /* RecentMessageCell.swift */; };
 		EB3CBE21231334C200979268 /* UserDetailsControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */; };
 		EB3CBE23231376AB00979268 /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */; };
 		EBCB41C922C32788007C2A1B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */; };
@@ -81,6 +82,7 @@
 		EB2F3CEA232ECB4E005C8983 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		EB2F3CEC232ED3F0005C8983 /* MatchesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHorizontalController.swift; sourceTree = "<group>"; };
 		EB2F3CEE232ED575005C8983 /* MatchesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHeader.swift; sourceTree = "<group>"; };
+		EB2F3CF0232EE8D6005C8983 /* RecentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageCell.swift; sourceTree = "<group>"; };
 		EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsControllerViewController.swift; sourceTree = "<group>"; };
 		EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
@@ -144,9 +146,9 @@
 				DAA54B6222E508FA00518908 /* SettingsTableViewCell.swift */,
 				DAA54B6422E553EB00518908 /* AgeRangeTableViewCell.swift */,
 				EB091169231CC7DD00670FDA /* MatchView.swift */,
-				EB09116B231CD21700670FDA /* SendMessageButton.swift */,
 				EB09116D231CD50C00670FDA /* KeepSwipingButton.swift */,
 				EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */,
+				EB09116B231CD21700670FDA /* SendMessageButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,6 +249,7 @@
 				EBE041722325E5D500971D6E /* MessageCell.swift */,
 				EBE041742325EBBB00971D6E /* CustomInputAccessoryView.swift */,
 				EB2F3CE8232ECB17005C8983 /* MatchCell.swift */,
+				EB2F3CF0232EE8D6005C8983 /* RecentMessageCell.swift */,
 			);
 			path = MatchesMessages;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				DAA54B6322E508FA00518908 /* SettingsTableViewCell.swift in Sources */,
 				EB2C66CD22C02B8900332D3B /* RegistrationViewController.swift in Sources */,
 				EBD239C1231319ED00F021A1 /* LoginController.swift in Sources */,
+				EB2F3CF1232EE8D6005C8983 /* RecentMessageCell.swift in Sources */,
 				DA712EA722B730D5009D6471 /* CardViewModel.swift in Sources */,
 				EB2F3CE9232ECB17005C8983 /* MatchCell.swift in Sources */,
 				EB091168231C60DC00670FDA /* PhotoController.swift in Sources */,
