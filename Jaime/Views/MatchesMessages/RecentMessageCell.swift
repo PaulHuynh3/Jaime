@@ -7,15 +7,17 @@
 //
 import LBTATools
 
-class RecentMessageCell: LBTAListCell<UIColor> {
+class RecentMessageCell: LBTAListCell<RecentMessage> {
 
     let userProfileImageView = UIImageView(image: #imageLiteral(resourceName: "jane1.jpg"), contentMode: .scaleAspectFill)
     let usernameLabel = UILabel(text: "USERNAME HERE", font: .boldSystemFont(ofSize: 18))
     let messageTextLabel = UILabel(text: "Some long line of text that should span 2 lines", font: .systemFont(ofSize: 16), textColor: .gray, numberOfLines: 2)
 
-    override var item: UIColor! {
+    override var item: RecentMessage! {
         didSet {
-            //            backgroundColor = item
+            usernameLabel.text = item.name
+            messageTextLabel.text = item.text
+            userProfileImageView.sd_setImage(with: URL(string: item.profileImageUrl))
         }
     }
 

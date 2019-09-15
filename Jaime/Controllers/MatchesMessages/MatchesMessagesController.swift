@@ -9,7 +9,35 @@
 import LBTATools
 import Firebase
 
-class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, UIColor, MatchesHeader>, UICollectionViewDelegateFlowLayout {
+class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, RecentMessage, MatchesHeader>, UICollectionViewDelegateFlowLayout {
+
+    var recentMessagesDictionary = [String: RecentMessage]()
+
+    fileprivate func fetchRecentMessages() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("recent_messages").addSnapshotListener { (querySnapshot, err) in
+            //check err
+
+            querySnapshot?.documentChanges.forEach({ (change) in
+
+                if change.type == .added || change.type == .modified {
+                    let dictionary = change.document.data()
+                    let recentMessage = RecentMessage(dictionary: dictionary)
+                    self.recentMessagesDictionary[recentMessage.uid] = recentMessage
+                }
+            })
+
+            self.resetItems()
+        }
+    }
+
+    fileprivate func resetItems() {
+        let values = Array(recentMessagesDictionary.values)
+        items = values.sorted(by: { (rm1, rm2) -> Bool in
+            return rm1.timestamp.compare(rm2.timestamp) == .orderedDescending
+        })
+        collectionView.reloadData()
+    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
@@ -33,7 +61,12 @@ class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        items = [.red, .blue, .green, .purple]
+        fetchRecentMessages()
+
+        items = [
+            //            .init(text: "Some random message that I'll use for each recent message cell", uid: "BLANK", name: "Big Burger", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchfirestore.appspot.com/o/images%2FD5F6A91A-241C-424A-AA96-9AC9E036EC9D?alt=media&token=d367e5c3-59b2-473f-88a5-2dd8057a012d", timestamp: Timestamp(date: .init())),
+            //            .init(text: "RANDOM MESSAGE", uid: "BLANK", name: "111", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchfirestore.appspot.com/o/images%2FD5F6A91A-241C-424A-AA96-9AC9E036EC9D?alt=media&token=d367e5c3-59b2-473f-88a5-2dd8057a012d", timestamp: Timestamp(date: .init()))
+        ]
 
         setupUI()
     }

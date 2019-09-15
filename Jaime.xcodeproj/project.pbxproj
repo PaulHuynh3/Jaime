@@ -35,6 +35,7 @@
 		EB2F3CED232ED3F0005C8983 /* MatchesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F3CEC232ED3F0005C8983 /* MatchesHorizontalController.swift */; };
 		EB2F3CEF232ED575005C8983 /* MatchesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F3CEE232ED575005C8983 /* MatchesHeader.swift */; };
 		EB2F3CF1232EE8D6005C8983 /* RecentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F3CF0232EE8D6005C8983 /* RecentMessageCell.swift */; };
+		EB2F3CF3232EEACB005C8983 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F3CF2232EEACB005C8983 /* RecentMessage.swift */; };
 		EB3CBE21231334C200979268 /* UserDetailsControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */; };
 		EB3CBE23231376AB00979268 /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */; };
 		EBCB41C922C32788007C2A1B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */; };
@@ -83,6 +84,7 @@
 		EB2F3CEC232ED3F0005C8983 /* MatchesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHorizontalController.swift; sourceTree = "<group>"; };
 		EB2F3CEE232ED575005C8983 /* MatchesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHeader.swift; sourceTree = "<group>"; };
 		EB2F3CF0232EE8D6005C8983 /* RecentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageCell.swift; sourceTree = "<group>"; };
+		EB2F3CF2232EEACB005C8983 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsControllerViewController.swift; sourceTree = "<group>"; };
 		EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				DA01FC1022B73E5500D98501 /* Advertiser.swift */,
 				EBE041702325E58100971D6E /* Messages.swift */,
 				EB2F3CEA232ECB4E005C8983 /* Match.swift */,
+				EB2F3CF2232EEACB005C8983 /* RecentMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				EB2C66CD22C02B8900332D3B /* RegistrationViewController.swift in Sources */,
 				EBD239C1231319ED00F021A1 /* LoginController.swift in Sources */,
 				EB2F3CF1232EE8D6005C8983 /* RecentMessageCell.swift in Sources */,
+				EB2F3CF3232EEACB005C8983 /* RecentMessage.swift in Sources */,
 				DA712EA722B730D5009D6471 /* CardViewModel.swift in Sources */,
 				EB2F3CE9232ECB17005C8983 /* MatchCell.swift in Sources */,
 				EB091168231C60DC00670FDA /* PhotoController.swift in Sources */,
