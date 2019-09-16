@@ -13,9 +13,26 @@ class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, Rec
 
     var recentMessagesDictionary = [String: RecentMessage]()
 
+    var listener: ListenerRegistration?
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if isMovingFromParent {
+            listener?.remove()
+        }
+    }
+
+    deinit {
+        print("Reclaiming memory from the MatchesMessagesController")
+    }
+
     fileprivate func fetchRecentMessages() {
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("recent_messages").addSnapshotListener { (querySnapshot, err) in
+
+        let query = Firestore.firestore().collection("matches_messages").document(currentUserId).collection("recent_messages")
+
+        listener = query.addSnapshotListener { (querySnapshot, err) in
             //check err
 
             querySnapshot?.documentChanges.forEach({ (change) in
@@ -71,11 +88,6 @@ class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, Rec
 
         fetchRecentMessages()
 
-        items = [
-            //            .init(text: "Some random message that I'll use for each recent message cell", uid: "BLANK", name: "Big Burger", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchfirestore.appspot.com/o/images%2FD5F6A91A-241C-424A-AA96-9AC9E036EC9D?alt=media&token=d367e5c3-59b2-473f-88a5-2dd8057a012d", timestamp: Timestamp(date: .init())),
-            //            .init(text: "RANDOM MESSAGE", uid: "BLANK", name: "111", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchfirestore.appspot.com/o/images%2FD5F6A91A-241C-424A-AA96-9AC9E036EC9D?alt=media&token=d367e5c3-59b2-473f-88a5-2dd8057a012d", timestamp: Timestamp(date: .init()))
-        ]
-
         setupUI()
     }
 
@@ -106,4 +118,5 @@ class MatchesMessagesController: LBTAListHeaderController<RecentMessageCell, Rec
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width, height: 130)
     }
+
 }

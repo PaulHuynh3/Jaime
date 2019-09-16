@@ -11,6 +11,10 @@ import Firebase
 
 class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionViewDelegateFlowLayout {
 
+    deinit {
+        print("CHATLOGCONTROLLER ----- Object is destroying itself properly, no retain cycles or any other memory related issues. Memory being reclaimed properly")
+    }
+
     fileprivate lazy var customNavBar = MessagesNavBar(match: self.match)
 
     fileprivate let navBarHeight: CGFloat = 120
@@ -99,6 +103,8 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         return true
     }
 
+    var listener: ListenerRegistration?
+
     fileprivate func fetchMessages() {
         print("Fetching messages")
 
@@ -106,7 +112,7 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
 
         let query = Firestore.firestore().collection("matches_messages").document(currentUserId).collection(match.uid).order(by: "timestamp")
 
-        query.addSnapshotListener { (querySnapshot, err) in
+        listener = query.addSnapshotListener { (querySnapshot, err) in
             if let err = err {
                 print("Failed to fetch messages:", err)
                 return
@@ -120,6 +126,15 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
             })
             self.collectionView.reloadData()
             self.collectionView.scrollToItem(at: [0, self.items.count - 1], at: .bottom, animated: true)
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        // tells you if its being popped off the nav stack
+        if isMovingFromParent {
+            listener?.remove()
         }
     }
 
@@ -188,4 +203,5 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
