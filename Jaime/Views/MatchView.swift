@@ -12,7 +12,7 @@ import Firebase
 class MatchView: UIView {
 
     var currentUser: User!
-
+    var delegate: HandleMatchesDelegate?
     var cardUID: String! {
         didSet {
             let query = Firestore.firestore().collection("users")
@@ -75,6 +75,7 @@ class MatchView: UIView {
         let button = SendMessageButton(type: .system)
         button.setTitle("SEND MESSAGE", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
         return button
     }()
 
@@ -185,12 +186,23 @@ class MatchView: UIView {
     }
 
     @objc fileprivate func handleTapDismiss() {
-        removeFromSuperview()
-
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.alpha = 0
         }) { (_) in
             self.removeFromSuperview()
         }
     }
+
+    @objc fileprivate func handleSendMessage() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .transitionCurlUp, animations: {
+            self.alpha = 0
+        }) { (_) in
+            self.removeFromSuperview()
+            self.delegate?.sendMessage()
+        }
+    }
+}
+
+protocol HandleMatchesDelegate {
+    func sendMessage()
 }

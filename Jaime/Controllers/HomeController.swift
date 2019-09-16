@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate {
+class HomeController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate, HandleMatchesDelegate {
 
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
@@ -206,6 +206,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         let matchView = MatchView()
         matchView.cardUID = cardUID
         matchView.currentUser = user
+        matchView.delegate = self
         view.addSubview(matchView)
         matchView.fillSuperview()
     }
@@ -307,5 +308,11 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
 
         overallStackView.bringSubviewToFront(cardsDeckView)
     }
+}
 
+extension HomeController {
+    func sendMessage() {
+        let vc = MatchesMessagesController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
