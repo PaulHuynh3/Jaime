@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct User: ProducesCardViewModel {
+struct User {
 
     var name: String?
     var age: Int?
@@ -31,7 +31,9 @@ struct User: ProducesCardViewModel {
         self.minSeekingAge = dictionary["minSeekingAge"] as? Int
         self.maxSeekingAge = dictionary["maxSeekingAge"] as? Int
     }
-    
+}
+
+extension User: ProducesCardViewModel {
     func toCardViewModel() -> CardViewModel {
         let attrubutedText = NSMutableAttributedString(string: name ?? "", attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy), .foregroundColor: UIColor.white])
 

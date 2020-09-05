@@ -58,7 +58,7 @@ class UserDetailsControllerViewController: UIViewController, UIScrollViewDelegat
     }
 
     @objc fileprivate func handleDislike() {
-
+        //handle dislike
     }
 
     fileprivate let extraSwipingHeight: CGFloat = 140

@@ -8,19 +8,20 @@
 
 import UIKit
 
-struct Advertiser: ProducesCardViewModel {
+struct Advertiser {
     let title: String
     let brandName: String
     let posterPhotoName: String
-    
+
+}
+
+extension Advertiser: ProducesCardViewModel {
     func toCardViewModel() -> CardViewModel {
-        
+
         let attributedString = NSMutableAttributedString(string: title, attributes: [.font: UIFont.systemFont(ofSize: 34, weight: .heavy), .foregroundColor: UIColor.white])
-        
+
         attributedString.append(NSAttributedString(string: "\n\(brandName)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .bold), .foregroundColor: UIColor.white]))
-        
+
         return CardViewModel(uid: "", imageNames: [posterPhotoName], attributedString: attributedString, textAllignment: .center)
     }
 }
-
-

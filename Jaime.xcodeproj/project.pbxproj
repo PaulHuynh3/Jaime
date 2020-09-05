@@ -137,24 +137,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		DA3ED8B622B5F37E001E47D5 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				EBE0416D2325D22D00971D6E /* MatchesMessages */,
-				DA3ED8B722B5F3B4001E47D5 /* HomeBottomControlsStackView.swift */,
-				DA3ED8B922B5FB15001E47D5 /* TopNavigationStackView.swift */,
-				DA3ED8BB22B6BEFE001E47D5 /* CardView.swift */,
-				EB2C66CE22C05B5900332D3B /* CustomTextfield.swift */,
-				DAA54B6222E508FA00518908 /* SettingsTableViewCell.swift */,
-				DAA54B6422E553EB00518908 /* AgeRangeTableViewCell.swift */,
-				EB091169231CC7DD00670FDA /* MatchView.swift */,
-				EB09116D231CD50C00670FDA /* KeepSwipingButton.swift */,
-				EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */,
-				EB09116B231CD21700670FDA /* SendMessageButton.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		DA3ED8BD22B6E891001E47D5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,30 +145,20 @@
 				EBE041702325E58100971D6E /* Messages.swift */,
 				EB2F3CEA232ECB4E005C8983 /* Match.swift */,
 				EB2F3CF2232EEACB005C8983 /* RecentMessage.swift */,
+				DA712EA622B730D5009D6471 /* CardViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		DA3ED8C022B72D88001E47D5 /* Controllers */ = {
+		DA3ED8C022B72D88001E47D5 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
 				EB3CBE1F231334A100979268 /* User Details */,
 				EBD239BF231319D900F021A1 /* Login */,
 				EBEC4EBA231DDE5900AB6891 /* MatchesMessages */,
-				DABBEAD122B593770025A6B7 /* HomeController.swift */,
-				EB2C66CC22C02B8900332D3B /* RegistrationViewController.swift */,
-				EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */,
-				DAA54B6022E4FD5300518908 /* SettingsTableViewController.swift */,
+				EBA9B74825044B3600179D2E /* Home */,
 			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		DA712EA522B730BB009D6471 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				DA712EA622B730D5009D6471 /* CardViewModel.swift */,
-			);
-			path = ViewModels;
+			path = Flow;
 			sourceTree = "<group>";
 		};
 		DABBEAC322B593770025A6B7 = {
@@ -210,10 +182,9 @@
 		DABBEACE22B593770025A6B7 /* Jaime */ = {
 			isa = PBXGroup;
 			children = (
-				DA712EA522B730BB009D6471 /* ViewModels */,
-				DA3ED8C022B72D88001E47D5 /* Controllers */,
+				DA3ED8C022B72D88001E47D5 /* Flow */,
 				DA3ED8BD22B6E891001E47D5 /* Model */,
-				DA3ED8B622B5F37E001E47D5 /* Views */,
+				EBA9B7452504412400179D2E /* CustomButtons */,
 				EBB98F2925042D8F0087A817 /* Helpers */,
 				DA3ED8B322B5E5FA001E47D5 /* Extensions */,
 				DABBEACF22B593770025A6B7 /* AppDelegate.swift */,
@@ -232,13 +203,83 @@
 				EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */,
 				EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */,
 				EB091167231C60DC00670FDA /* PhotoController.swift */,
+				EBA9B74625044AC800179D2E /* Settings */,
 			);
 			path = "User Details";
+			sourceTree = "<group>";
+		};
+		EBA9B7442504404E00179D2E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EBE041722325E5D500971D6E /* MessageCell.swift */,
+				EB2F3CE8232ECB17005C8983 /* MatchCell.swift */,
+				EB2F3CF0232EE8D6005C8983 /* RecentMessageCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		EBA9B7452504412400179D2E /* CustomButtons */ = {
+			isa = PBXGroup;
+			children = (
+				EB09116D231CD50C00670FDA /* KeepSwipingButton.swift */,
+				EB09116B231CD21700670FDA /* SendMessageButton.swift */,
+			);
+			path = CustomButtons;
+			sourceTree = "<group>";
+		};
+		EBA9B74625044AC800179D2E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DAA54B6022E4FD5300518908 /* SettingsTableViewController.swift */,
+				EBA9B74725044AD200179D2E /* Cell */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		EBA9B74725044AD200179D2E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DAA54B6422E553EB00518908 /* AgeRangeTableViewCell.swift */,
+				DAA54B6222E508FA00518908 /* SettingsTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		EBA9B74825044B3600179D2E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				DABBEAD122B593770025A6B7 /* HomeController.swift */,
+				DA3ED8B722B5F3B4001E47D5 /* HomeBottomControlsStackView.swift */,
+				EBA9B74925044B8600179D2E /* Views */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EBA9B74925044B8600179D2E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB091169231CC7DD00670FDA /* MatchView.swift */,
+				DA3ED8BB22B6BEFE001E47D5 /* CardView.swift */,
+				DA3ED8B922B5FB15001E47D5 /* TopNavigationStackView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EBA9B74A25044C1E00179D2E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EBEC4EBD231DE55900AB6891 /* MatchesNavBar.swift */,
+				EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */,
+				EBE041742325EBBB00971D6E /* CustomInputAccessoryView.swift */,
+				EBA9B7442504404E00179D2E /* Cells */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		EBB98F2925042D8F0087A817 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				EB2C66CE22C05B5900332D3B /* CustomTextfield.swift */,
 				EB1D60CD22DBCB180054683A /* Bindable.swift */,
 			);
 			path = Helpers;
@@ -247,22 +288,12 @@
 		EBD239BF231319D900F021A1 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				EB2C66CC22C02B8900332D3B /* RegistrationViewController.swift */,
+				EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */,
 				EBD239C0231319ED00F021A1 /* LoginController.swift */,
 				EBD239C2231319F800F021A1 /* LoginViewModel.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		EBE0416D2325D22D00971D6E /* MatchesMessages */ = {
-			isa = PBXGroup;
-			children = (
-				EBE0416E2325D25D00971D6E /* MessagesNavBar.swift */,
-				EBE041722325E5D500971D6E /* MessageCell.swift */,
-				EBE041742325EBBB00971D6E /* CustomInputAccessoryView.swift */,
-				EB2F3CE8232ECB17005C8983 /* MatchCell.swift */,
-				EB2F3CF0232EE8D6005C8983 /* RecentMessageCell.swift */,
-			);
-			path = MatchesMessages;
 			sourceTree = "<group>";
 		};
 		EBEC4EBA231DDE5900AB6891 /* MatchesMessages */ = {
@@ -272,6 +303,7 @@
 				EBE0416B2325BB6B00971D6E /* ChatLogController.swift */,
 				EB2F3CEC232ED3F0005C8983 /* MatchesHorizontalController.swift */,
 				EB2F3CEE232ED575005C8983 /* MatchesHeader.swift */,
+				EBA9B74A25044C1E00179D2E /* Views */,
 			);
 			path = MatchesMessages;
 			sourceTree = "<group>";
