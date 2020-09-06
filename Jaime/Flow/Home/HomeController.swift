@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeController: UIViewController, LoginControllerDelegate, CardViewDelegate, HandleMatchesDelegate {
+class HomeController: UIViewController {
 
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
@@ -40,15 +40,12 @@ class HomeController: UIViewController, LoginControllerDelegate, CardViewDelegat
 
     private func handleUserState() {
         if Auth.auth().currentUser == nil {
+            cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
             let registrationController = RegistrationController()
             registrationController.delegate = self
             let navController = UINavigationController(rootViewController: registrationController)
             present(navController, animated: true)
         }
-    }
-
-    func didFinishLoggingIn() {
-        fetchCurrentUser()
     }
 
     fileprivate let hud = JGProgressHUD(style: .dark)
@@ -219,11 +216,6 @@ class HomeController: UIViewController, LoginControllerDelegate, CardViewDelegat
         performSwipeAnimation(translation: -700, angle: -15)
     }
 
-    func didRemoveCard(cardView: CardView) {
-        self.topCardView?.removeFromSuperview()
-        self.topCardView = self.topCardView?.nextCardView
-    }
-
     var lastFetchedUser: User?
 
     fileprivate func fetchUsersFromFirestore() {
@@ -265,12 +257,6 @@ class HomeController: UIViewController, LoginControllerDelegate, CardViewDelegat
 
     var users = [String: User]()
 
-    func didTapMoreInfo(cardViewModel: CardViewModel) {
-        let userDetailsController = UserDetailsControllerViewController()
-        userDetailsController.cardViewModel = cardViewModel
-        present(userDetailsController, animated: true)
-    }
-
     fileprivate func setupCardFromUser(user: User) -> CardView {
         let cardView = CardView(frame: .zero)
         cardView.cardViewModel = user.toCardViewModel()
@@ -281,7 +267,10 @@ class HomeController: UIViewController, LoginControllerDelegate, CardViewDelegat
         return cardView
     }
 
-    @objc func handleSettings() { //if the user is logged out dont let them click on this shit
+    @objc func handleSettings() {
+        if Auth.auth().currentUser == nil {
+            return
+        }
         let settingsController = SettingsTableViewController()
         settingsController.delegate = self
         let navController = UINavigationController(rootViewController: settingsController)
@@ -292,8 +281,6 @@ class HomeController: UIViewController, LoginControllerDelegate, CardViewDelegat
         let vc = MatchesMessagesController()
         navigationController?.pushViewController(vc, animated: true)
     }
-
-    // MARK:- Fileprivate
 
     fileprivate func setupLayout() {
         view.backgroundColor = .white
@@ -308,10 +295,29 @@ class HomeController: UIViewController, LoginControllerDelegate, CardViewDelegat
     }
 }
 
-extension HomeController {
+extension HomeController: HandleMatchesDelegate {
     func sendMessage() {
         let vc = MatchesMessagesController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension HomeController: CardViewDelegate {
+    func didTapMoreInfo(cardViewModel: CardViewModel) {
+        let userDetailsController = UserDetailsControllerViewController()
+        userDetailsController.cardViewModel = cardViewModel
+        present(userDetailsController, animated: true)
+    }
+
+    func didRemoveCard(cardView: CardView) {
+        self.topCardView?.removeFromSuperview()
+        self.topCardView = self.topCardView?.nextCardView
+    }
+}
+
+extension HomeController: LoginControllerDelegate {
+    func didFinishLoggingIn() {
+        fetchCurrentUser()
     }
 }
 

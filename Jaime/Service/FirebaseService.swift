@@ -11,6 +11,7 @@ import Firebase
 
 class FirebaseService: FirebaseServiceDelegate {
     typealias Result<T, V: Error> = (T?, V?) -> Void
+    typealias FirebaseError<T: Error> = (T?) -> Void
 
     // MARK: - Singleton
 
@@ -19,6 +20,12 @@ class FirebaseService: FirebaseServiceDelegate {
 
     var userUid: String {
         Auth.auth().currentUser?.uid ?? ""
+    }
+
+    func signIn(email: String, password: String, completion: @escaping FirebaseError<Error>) {
+        Auth.auth().signIn(withEmail: email, password: password) { (res, err) in
+            completion(err)
+        }
     }
 
     func createUser(email: String, password: String, completion: @escaping Result<AuthDataResult, Error>) {
@@ -45,21 +52,17 @@ class FirebaseService: FirebaseServiceDelegate {
         }
     }
 
-
-    func saveUserInfoToFirestore(withPath collectionPath: String, userInfo: [String: Any], completion: @escaping ((Error?) -> Void)) {
+    func saveUserInfoToFirestore(withPath collectionPath: String, userInfo: [String: Any], completion: @escaping FirebaseError<Error>) {
         Firestore.firestore().collection(collectionPath).document(Auth.auth().currentUser?.uid ?? "").setData(userInfo) { (err) in
-            if let err = err {
-                completion(err)
-                return
-            }
-            completion(nil)
+            completion(err)
         }
     }
 }
 
 protocol FirebaseServiceDelegate {
     var userUid: String { get }
+    func signIn(email: String, password: String, completion: @escaping FirebaseService.FirebaseError<Error>)
     func createUser(email: String, password: String, completion: @escaping FirebaseService.Result<AuthDataResult, Error>)
     func saveImageToStorage(fileName: String, image: UIImage, completion: @escaping FirebaseService.Result<URL, Error>)
-    func saveUserInfoToFirestore(withPath collectionPath: String, userInfo: [String: Any], completion: @escaping ((Error?) -> Void))
+    func saveUserInfoToFirestore(withPath collectionPath: String, userInfo: [String: Any], completion: @escaping FirebaseService.FirebaseError<Error>)
 }

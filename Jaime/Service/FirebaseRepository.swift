@@ -21,25 +21,25 @@ class FirebaseRepository {
         return service.userUid
     }
 
-    func createUser(email: String, password: String, completion: @escaping ((Error?) -> Void)) {
+    func signIn(email: String, password: String, completion: @escaping FirebaseService.FirebaseError<Error>) {
+        service.signIn(email: email, password: password) { err in
+            completion(err)
+        }
+    }
+
+    func createUser(email: String, password: String, completion: @escaping FirebaseService.FirebaseError<Error>) {
         service.createUser(email: email, password: password) { (result, error) in
-            if let error = error {
-                completion(error)
-            }
-            completion(nil)
+            completion(error)
         }
     }
 
-    func saveImageToStorage(fileName: String, image: UIImage, completion: @escaping ((URL?, Error?) -> Void)) {
+    func saveImageToStorage(fileName: String, image: UIImage, completion: @escaping FirebaseService.Result<URL?, Error>) {
         service.saveImageToStorage(fileName: fileName, image: image) { (url, err) in
-            if let err = err {
-                completion(nil, err)
-            }
-            completion(url, nil)
+            completion(url, err)
         }
     }
 
-    func saveInfoToFireStore(withPath collectionPath: String, userDict: [String: Any], completion: @escaping ((Error?) -> Void)) {
+    func saveInfoToFireStore(withPath collectionPath: String, userDict: [String: Any], completion: @escaping FirebaseService.FirebaseError<Error>) {
         service.saveUserInfoToFirestore(withPath: collectionPath, userInfo: userDict, completion: completion)
     }
 }

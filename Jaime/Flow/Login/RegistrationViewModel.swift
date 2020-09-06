@@ -56,7 +56,8 @@ class RegistrationViewModel {
                 completion(err)
                 return
             }
-            self.saveInfoToFirestore(imageUrl: url?.absoluteString ?? "") { err in
+            let urlString = url.flatMap{ $0?.absoluteString }
+            self.saveInfoToFirestore(imageUrl: urlString ?? "") { err in
                 self.bindableIsRegistering.value = false
                 if let err = err {
                     completion(err)

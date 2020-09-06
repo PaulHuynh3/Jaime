@@ -25,7 +25,7 @@ class LoginViewModel {
     func performLogin(completion: @escaping (Error?) -> ()) {
         guard let email = email, let password = password else { return }
         isLoggingIn.value = true
-        Auth.auth().signIn(withEmail: email, password: password) { (res, err) in
+        FirebaseRepository.shared.signIn(email: email, password: password) { err in
             completion(err)
         }
     }
