@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import Firebase
 
 class RegistrationViewModel {
 
     var bindableIsRegistering = Bindable<Bool>()
     var bindableImage = Bindable<UIImage>()
     var bindableIsFormValidObserver = Bindable<Bool>()
+    var firebaseRepository = FirebaseRepository.shared
 
     var fullName: String? {
         didSet {
@@ -40,8 +40,8 @@ class RegistrationViewModel {
         guard let email = email else { return }
         guard let password = password else { return }
         bindableIsRegistering.value = true
-        Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
-            if let err = error {
+        firebaseRepository.createUser(email: email, password: password) { (err) in
+            if let err = err {
                 completion(err)
                 return
             }
@@ -51,35 +51,32 @@ class RegistrationViewModel {
 
     fileprivate func saveImageToFirebase(completion: @escaping (Error?) -> ()) {
         let fileName = UUID().uuidString
-        let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
-        let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
-        ref.putData(imageData, metadata: nil, completion: { (_, err) in
+        firebaseRepository.saveImageToStorage(fileName: fileName, image: bindableImage.value ?? UIImage()) { (url, err) in
             if let err = err {
                 completion(err)
                 return
             }
-            ref.downloadURL(completion: { (url, err) in
+            self.saveInfoToFirestore(imageUrl: url?.absoluteString ?? "") { err in
+                self.bindableIsRegistering.value = false
                 if let err = err {
                     completion(err)
                     return
                 }
-                self.bindableIsRegistering.value = false
-                let imageUrl = url?.absoluteString ?? ""
-                self.saveInfoToFirestore(imageUrl: imageUrl, completion: completion)
-            })
-        })
+                completion(nil)
+            }
+        }
     }
 
     fileprivate func saveInfoToFirestore(imageUrl: String, completion: @escaping (Error?) -> ()) {
-        let uid = Auth.auth().currentUser?.uid ?? ""
-        let docData: [String: Any] = ["fullName": self.fullName ?? "",
+        let uid = firebaseRepository.userUid
+        let userDataDict: [String: Any] = ["fullName": self.fullName ?? "",
                             "uid": uid,
                             "imageUrl1": imageUrl,
                             "age": 18,
                             "minSeekingAge": SettingsTableViewController.defaultMinSeekingAge,
                             "maxSeekingAge": SettingsTableViewController.defaultMaxSeekingAge
             ]
-        Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+        firebaseRepository.saveInfoToFireStore(withPath: "users", userDict: userDataDict) { (err) in
             if let err = err {
                 completion(err)
                 return

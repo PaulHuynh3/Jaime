@@ -10,13 +10,13 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate, HandleMatchesDelegate {
+class HomeController: UIViewController, LoginControllerDelegate, CardViewDelegate, HandleMatchesDelegate {
 
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomControls = HomeBottomControlsStackView()
 
-    var cardViewModels = [CardViewModel]() // empty array
+    var cardViewModels = [CardViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +35,10 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("HomeController did appear")
-        // you want to kick the user out when they log out
+        handleUserState()
+    }
+
+    private func handleUserState() {
         if Auth.auth().currentUser == nil {
             let registrationController = RegistrationController()
             registrationController.delegate = self
@@ -75,6 +77,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         Firestore.firestore().collection("swipes").document(uid).getDocument { (snapshot, err) in
             if let err = err {
                 print("Failed to fetch swipes info for currently logged in users:", err)
+                self.hud.dismiss()
                 return
             }
             guard let data = snapshot?.data() as? [String: Int] else {
@@ -278,7 +281,7 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         return cardView
     }
 
-    @objc func handleSettings() {
+    @objc func handleSettings() { //if the user is logged out dont let them click on this shit
         let settingsController = SettingsTableViewController()
         settingsController.delegate = self
         let navController = UINavigationController(rootViewController: settingsController)
@@ -288,11 +291,6 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     @objc func handleMessages() {
         let vc = MatchesMessagesController()
         navigationController?.pushViewController(vc, animated: true)
-    }
-
-    func didSaveSettings() {
-        print("Notified of dismissal from SettingsController in HomeController")
-        fetchCurrentUser()
     }
 
     // MARK:- Fileprivate
@@ -314,5 +312,16 @@ extension HomeController {
     func sendMessage() {
         let vc = MatchesMessagesController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension HomeController: SettingsControllerDelegate {
+    func didSaveSettings() {
+        print("Notified of dismissal from SettingsController in HomeController")
+        fetchCurrentUser()
+    }
+
+    func didLogout() {
+        handleUserState()
     }
 }

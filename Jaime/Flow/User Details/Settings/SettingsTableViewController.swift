@@ -14,6 +14,7 @@ import SDWebImage
 
 protocol SettingsControllerDelegate {
     func didSaveSettings()
+    func didLogout()
 }
 
 class CustomImagePickController: UIImagePickerController {
@@ -23,6 +24,8 @@ class CustomImagePickController: UIImagePickerController {
 }
 
 class SettingsTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    let userState = Bindable<Bool>()
 
     deinit {
         print("Object is destroying itself properly, no retain cycles or any other memory related issues. Memory being reclaimed properly")
@@ -280,15 +283,16 @@ class SettingsTableViewController: UITableViewController, UIImagePickerControlle
     }
 
     @objc fileprivate func handleLogout() {
-        try? Auth.auth().signOut()
         dismiss(animated: true)
+        try? Auth.auth().signOut()
+        delegate?.didLogout()
     }
 
     @objc fileprivate func handleCancel() {
         dismiss(animated: true)
     }
 
-    @objc fileprivate func handleSave() { //persist specific user to firestore
+    @objc fileprivate func handleSave() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let docData: [String: Any] = [
             "uid": uid,

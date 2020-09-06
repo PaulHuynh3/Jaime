@@ -37,6 +37,8 @@
 		EB2F3CF3232EEACB005C8983 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F3CF2232EEACB005C8983 /* RecentMessage.swift */; };
 		EB3CBE21231334C200979268 /* UserDetailsControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */; };
 		EB3CBE23231376AB00979268 /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */; };
+		EB56F1E425046C0F00C43FA6 /* FirebaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56F1E325046C0F00C43FA6 /* FirebaseRepository.swift */; };
+		EB56F1E625046C1F00C43FA6 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56F1E525046C1F00C43FA6 /* FirebaseService.swift */; };
 		EBC75FEB24FF4BB300600445 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBC75FEA24FF4BB300600445 /* GoogleService-Info.plist */; };
 		EBCB41C922C32788007C2A1B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */; };
 		EBD239BE23130EFB00F021A1 /* Firebase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD239BD23130EFB00F021A1 /* Firebase+Utils.swift */; };
@@ -86,6 +88,8 @@
 		EB2F3CF2232EEACB005C8983 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		EB3CBE20231334C200979268 /* UserDetailsControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsControllerViewController.swift; sourceTree = "<group>"; };
 		EB3CBE22231376AB00979268 /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
+		EB56F1E325046C0F00C43FA6 /* FirebaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepository.swift; sourceTree = "<group>"; };
+		EB56F1E525046C1F00C43FA6 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		EBC75FEA24FF4BB300600445 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EBCB41C822C32788007C2A1B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		EBD239BD23130EFB00F021A1 /* Firebase+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Utils.swift"; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 			children = (
 				DA3ED8C022B72D88001E47D5 /* Flow */,
 				DA3ED8BD22B6E891001E47D5 /* Model */,
+				EB56F1E225046BD300C43FA6 /* Service */,
 				EBA9B7452504412400179D2E /* CustomButtons */,
 				EBB98F2925042D8F0087A817 /* Helpers */,
 				DA3ED8B322B5E5FA001E47D5 /* Extensions */,
@@ -206,6 +211,15 @@
 				EBA9B74625044AC800179D2E /* Settings */,
 			);
 			path = "User Details";
+			sourceTree = "<group>";
+		};
+		EB56F1E225046BD300C43FA6 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				EB56F1E325046C0F00C43FA6 /* FirebaseRepository.swift */,
+				EB56F1E525046C1F00C43FA6 /* FirebaseService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		EBA9B7442504404E00179D2E /* Cells */ = {
@@ -426,10 +440,12 @@
 			files = (
 				EBE0416C2325BB6B00971D6E /* ChatLogController.swift in Sources */,
 				EB3CBE21231334C200979268 /* UserDetailsControllerViewController.swift in Sources */,
+				EB56F1E425046C0F00C43FA6 /* FirebaseRepository.swift in Sources */,
 				EB1D60CE22DBCB180054683A /* Bindable.swift in Sources */,
 				DABBEAD222B593770025A6B7 /* HomeController.swift in Sources */,
 				EBE041712325E58100971D6E /* Messages.swift in Sources */,
 				EBCB41C922C32788007C2A1B /* RegistrationViewModel.swift in Sources */,
+				EB56F1E625046C1F00C43FA6 /* FirebaseService.swift in Sources */,
 				EBE0416F2325D25D00971D6E /* MessagesNavBar.swift in Sources */,
 				DAA54B6522E553EB00518908 /* AgeRangeTableViewCell.swift in Sources */,
 				EB2F3CEB232ECB4E005C8983 /* Match.swift in Sources */,
